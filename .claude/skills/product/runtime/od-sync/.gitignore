@@ -1,0 +1,8 @@
+# OD sync runtime artifacts.
+# Daily --check / apply reports (*.md) are committed as the audit trail.
+# Tarball cache, extraction scratch, and staging dirs are not — the last is
+# left behind only when --apply fails schema validation ("preserved for
+# inspection"); a successful --apply removes it.
+tarball-*.tar.gz
+extracted-*/
+staging-*/

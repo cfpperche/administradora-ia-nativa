@@ -1,0 +1,47 @@
+// Agent0 — MCP recipes
+//
+// This file is a TEMPLATE. Workflow:
+//   1. cp .mcp.json.example .mcp.json
+//   2. Open .mcp.json and REMOVE the leading `//` markers from the blocks
+//      you want active.
+//   3. JSON does NOT support `//` comments. Strict parsers reject them.
+//      The `.example` suffix is the "do not parse directly" signal; the
+//      copy step in (1) is where you make the file valid JSON.
+//   4. For DBHub: set DATABASE_URL in your shell or .env before launching
+//      claude. NEVER commit a populated DATABASE_URL to git.
+//   5. For Chrome DevTools MCP: confirm Chrome/Chrome-for-Testing is
+//      installed on the host (`which google-chrome`).
+//   6. Restart the Claude Code session — .mcp.json is loaded at start.
+//
+// Full per-recipe documentation (capabilities, when to enable, runtime
+// requirements, security): .claude/rules/mcp-recipes.md
+{
+  "mcpServers": {
+//    "playwright": {
+//      "command": "npx",
+//      "args": ["@playwright/mcp@latest"]
+//    },
+//    "chrome-devtools": {
+//      "command": "npx",
+//      "args": ["-y", "chrome-devtools-mcp@latest"]
+//    },
+//    "dbhub": {
+//      "command": "npx",
+//      "args": ["@bytebase/dbhub@latest"],
+//      "env": {
+//        "DATABASE_URL": "postgres://user:password@localhost:5432/dbname?sslmode=disable"
+//      }
+//    },
+//    "next-devtools": {
+//      "command": "npx",
+//      "args": ["-y", "next-devtools-mcp@latest"]
+//    },
+//    "laravel-boost": {
+//      "command": "php",
+//      "args": ["artisan", "boost:mcp"]
+//      // Requires: composer require laravel/boost --dev + php artisan boost:install.
+//      // Runs within the Laravel project (artisan must be present). Laravel 10-13.
+//      // Full recipe: .claude/rules/mcp-recipes.md § Laravel Boost MCP.
+//    }
+  }
+}

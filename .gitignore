@@ -1,0 +1,64 @@
+# Claude Code — personal config and local state (do not version)
+.claude/settings.local.json
+CLAUDE.local.md
+.claude/projects/
+.mcp.json
+
+# Ephemeral state under .claude/ — per-machine runtime, never commit
+.claude/.runtime/
+.claude/.runtime-state/
+.claude/.session-state/
+.claude/.delegation-state/
+.claude/COMPACT_NOTES.md
+.claude/delegation-audit.jsonl
+.claude/delegation-audit.jsonl.lock
+.claude/secrets-audit.jsonl
+.claude/secrets-audit.jsonl.lock
+.claude/supply-chain-audit.jsonl
+.claude/supply-chain-audit.jsonl.lock
+.claude/.rule-load-debug.jsonl
+.claude/.rule-load-debug.jsonl.lock
+.claude/.browser-state/*.json
+.claude/.brainstorm-state/
+.claude/.routines-state/
+
+# sync-harness CLAUDE.md migration artifacts (ephemeral; ratified via mv,
+# divergence reports re-generated each sync until resolved)
+.claude/CLAUDE.md.migration-candidate.md
+.claude/CLAUDE.md.diverged-region.md
+.claude/CLAUDE.md.diverged-sections.md
+
+# Playwright MCP runtime artifacts (snapshots, console logs)
+.playwright-mcp/
+
+# Exploratory prototypes (not yet promoted to docs/specs/ or src/)
+prototypes/
+
+# Secrets-scan scenario tests run in mktemp /tmp dirs by default, but reserve a
+# scratchpad path in case a future test variant needs in-repo state.
+.claude/tests/secrets-scan/.tmp/
+
+# Stack-specific patterns — uncomment whichever applies to your fork.
+# Template is stack-agnostic by design; forks add their own.
+# (.gitignore does NOT support trailing inline comments — descriptions must
+# stay on their own lines above each pattern so uncommenting only the path
+# leaves a valid entry.)
+#
+# JS/TS (npm/pnpm/yarn/bun)
+# node_modules/
+#
+# Python (uv/poetry/pdm/raw venv)
+# .venv/
+# __pycache__/
+# .pytest_cache/
+# .mypy_cache/
+# .ruff_cache/
+#
+# Rust (cargo)
+# target/
+#
+# Go (legacy) / PHP / Ruby
+# vendor/
+
+# Visual-audit screenshots — evidence captured by playwright MCP; conversation is the memory
+/audit-*.png

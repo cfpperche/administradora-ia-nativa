@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/product REPORT — {{SLUG}}</title>
+
+<!-- Client-side render stack (spec 073). Pinned CDN majors; the report degrades
+     to raw <pre> markdown if marked fails to load. See docs/specs/073-product-report-html/. -->
+<script src="https://cdn.jsdelivr.net/npm/marked@14/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/highlight.min.js"></script>
+<link rel="stylesheet" id="hljs-theme"
+      href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/styles/github.min.css">
+
+<style>
+  :root {
+    --bg: #ffffff; --bg-alt: #f6f7f9; --fg: #1a1d21; --fg-dim: #6b7280;
+    --border: #e3e6ea; --accent: #2563eb; --accent-soft: #eaf0fe;
+    --ok: #15803d; --partial: #b45309; --blocked: #b91c1c; --pending: #9ca3af;
+  }
+  html[data-theme="dark"] {
+    --bg: #15181c; --bg-alt: #1d2127; --fg: #e6e8eb; --fg-dim: #9aa1ab;
+    --border: #2c313a; --accent: #5b8cff; --accent-soft: #1f2a44;
+    --ok: #4ade80; --partial: #fbbf24; --blocked: #f87171; --pending: #6b7280;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--fg); background: var(--bg);
+  }
+  .topbar {
+    display: flex; align-items: center; gap: 16px; padding: 10px 18px;
+    border-bottom: 1px solid var(--border); background: var(--bg-alt);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .topbar .slug { font-weight: 700; font-size: 15px; }
+  .topbar .meta { color: var(--fg-dim); font-size: 13px; }
+  .topbar .spacer { flex: 1; }
+  .topbar button {
+    border: 1px solid var(--border); background: var(--bg); color: var(--fg);
+    border-radius: 6px; padding: 5px 10px; cursor: pointer; font-size: 13px;
+  }
+  .cov-bar {
+    width: 120px; height: 8px; border-radius: 4px; background: var(--border);
+    overflow: hidden;
+  }
+  .cov-bar > i { display: block; height: 100%; background: var(--ok); }
+  .layout { display: flex; min-height: calc(100vh - 49px); }
+  .sidebar {
+    width: 270px; flex-shrink: 0; border-right: 1px solid var(--border);
+    background: var(--bg-alt); overflow-y: auto; padding: 12px 0;
+    max-height: calc(100vh - 49px); position: sticky; top: 49px;
+  }
+  .phase { margin-bottom: 6px; }
+  .phase-h {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--fg-dim); padding: 8px 18px 4px;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 8px; width: 100%;
+    border: 0; background: none; color: var(--fg); cursor: pointer;
+    text-align: left; padding: 6px 18px; font-size: 13.5px;
+  }
+  .nav-item:hover { background: var(--accent-soft); }
+  .nav-item.active { background: var(--accent-soft); font-weight: 600; box-shadow: inset 3px 0 0 var(--accent); }
+  .nav-item .ico { width: 14px; text-align: center; font-size: 12px; }
+  .nav-item[data-status="ok"] .ico { color: var(--ok); }
+  .nav-item[data-status="partial"] .ico { color: var(--partial); }
+  .nav-item[data-status="blocked"] .ico { color: var(--blocked); }
+  .nav-item[data-status="pending"] { color: var(--pending); }
+  .nav-item[data-status="pending"] .ico { color: var(--pending); }
+  .pane { flex: 1; padding: 28px 40px; max-width: 920px; overflow-x: auto; }
+  .pane .placeholder { color: var(--fg-dim); padding: 40px 0; font-style: italic; }
+  /* spec 073 follow-up — sub-tabs split a multi-part step so no step is one
+     giant scroll; only the active tab's parts are in the DOM. */
+  .tabs {
+    display: flex; flex-wrap: wrap; gap: 4px;
+    border-bottom: 1px solid var(--border); margin-bottom: 4px;
+  }
+  .tab {
+    border: 1px solid transparent; border-bottom: 0; background: none;
+    color: var(--fg-dim); cursor: pointer; font: 600 13px/1.4 inherit;
+    padding: 7px 13px; border-radius: 7px 7px 0 0; margin-bottom: -1px;
+  }
+  .tab:hover { color: var(--fg); background: var(--bg-alt); }
+  .tab.active {
+    color: var(--accent); background: var(--bg);
+    border-color: var(--border); border-bottom-color: var(--bg);
+  }
+  .part-label {
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+    color: var(--fg-dim); margin: 28px 0 8px; padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .part-label:first-child { margin-top: 0; }
+  .md h1 { font-size: 26px; } .md h2 { font-size: 21px; margin-top: 1.6em; }
+  .md h3 { font-size: 17px; }
+  .md table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; }
+  .md th, .md td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+  .md th { background: var(--bg-alt); }
+  .md pre { background: var(--bg-alt); padding: 12px; border-radius: 8px; overflow-x: auto; }
+  .md code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+  .md :not(pre) > code { background: var(--bg-alt); padding: 1px 5px; border-radius: 4px; }
+  .md blockquote {
+    border-left: 3px solid var(--border); margin: 12px 0; padding: 2px 14px; color: var(--fg-dim);
+  }
+  .md img { max-width: 100%; }
+  .md .mermaid { background: var(--bg-alt); border-radius: 8px; padding: 12px; text-align: center; }
+  .frame {
+    width: 100%; height: 720px; border: 1px solid var(--border);
+    border-radius: 8px; background: #fff;
+  }
+  .frame-link { font-size: 12px; margin: 4px 0 0; }
+  .frame-link a { color: var(--accent); }
+  .navtoggle { display: none; }
+  .backdrop {
+    display: none; position: fixed; inset: 0; z-index: 20;
+    background: rgba(0, 0, 0, .45);
+  }
+  /* QA finding #1 — collapse the sidebar into a drawer on narrow viewports */
+  @media (max-width: 720px) {
+    .topbar { flex-wrap: wrap; gap: 8px 12px; padding: 8px 12px; }
+    .topbar .spacer, .topbar .gen { display: none; }
+    .navtoggle { display: inline-block; }
+    .layout { display: block; }
+    .sidebar {
+      position: fixed; top: 0; bottom: 0; left: 0; z-index: 30;
+      width: 84%; max-width: 320px; max-height: none;
+      transform: translateX(-100%); transition: transform .2s ease;
+    }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar.open ~ .backdrop { display: block; }
+    .pane { max-width: none; padding: 18px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="navtoggle" id="nav-toggle" type="button" aria-label="Toggle navigation">☰</button>
+  <span class="slug">{{SLUG}}</span>
+  <span class="meta">stack {{STACK}}</span>
+  <span class="meta">coverage {{COVERAGE}}</span>
+  <span class="cov-bar"><i id="covfill"></i></span>
+  <span class="spacer"></span>
+  <span class="meta gen">generated {{GENERATED_AT}}</span>
+  <button id="theme-toggle" type="button">◑ theme</button>
+</header>
+
+<div class="layout">
+  <nav class="sidebar">{{NAV}}</nav>
+  <div class="backdrop" id="backdrop"></div>
+  <main class="pane" id="pane">
+    <div class="placeholder">Select an artifact from the sidebar to read it.</div>
+  </main>
+</div>
+
+<script type="application/json" id="report-data">{{REPORT_DATA}}</script>
+
+<script type="module">
+  // mermaid is heavy (~3 MB) and ESM-only — load it lazily, signal readiness.
+  try {
+    const mermaid = (await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs')).default;
+    mermaid.initialize({ startOnLoad: false, securityLevel: 'strict',
+      theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default' });
+    window.__mermaid = mermaid;
+    document.dispatchEvent(new Event('mermaid-ready'));
+  } catch (e) { /* mermaid unavailable — diagrams stay as code blocks */ }
+</script>
+
+<script>
+(function () {
+  "use strict";
+  var DATA = {};
+  try { DATA = JSON.parse(document.getElementById('report-data').textContent); }
+  catch (e) { DATA = { artifacts: [] }; }
+  var byId = {};
+  (DATA.artifacts || []).forEach(function (a) { byId[a.id] = a; });
+
+  var pane = document.getElementById('pane');
+  var hasMarked = typeof window.marked !== 'undefined';
+
+  function renderMarkdown(text) {
+    var host = document.createElement('div');
+    host.className = 'md';
+    if (!hasMarked) {
+      var pre = document.createElement('pre');
+      pre.textContent = text;
+      host.appendChild(pre);
+      return host;
+    }
+    var raw = window.marked.parse(text, { gfm: true });
+    host.innerHTML = (typeof window.DOMPurify !== 'undefined')
+      ? window.DOMPurify.sanitize(raw)
+      : raw;
+    // mermaid: convert ```mermaid fenced blocks into <pre class="mermaid">
+    host.querySelectorAll('code.language-mermaid').forEach(function (code) {
+      var pre = document.createElement('pre');
+      pre.className = 'mermaid';
+      pre.textContent = code.textContent;
+      var parent = code.parentElement;
+      parent.replaceWith(pre);
+    });
+    // syntax highlight the remaining code blocks
+    if (typeof window.hljs !== 'undefined') {
+      host.querySelectorAll('pre code').forEach(function (b) {
+        try { window.hljs.highlightElement(b); } catch (e) {}
+      });
+    }
+    return host;
+  }
+
+  function renderCode(text, lang) {
+    var pre = document.createElement('pre');
+    var code = document.createElement('code');
+    if (lang) code.className = 'language-' + lang;
+    code.textContent = text;
+    pre.appendChild(code);
+    if (typeof window.hljs !== 'undefined') {
+      try { window.hljs.highlightElement(code); } catch (e) {}
+    }
+    return pre;
+  }
+
+  function renderFrame(srcdoc, label) {
+    var wrap = document.createElement('div');
+    var f = document.createElement('iframe');
+    f.className = 'frame';
+    f.loading = 'lazy';
+    // srcdoc inlines the artifact HTML — REPORT.html stays portable when moved
+    // away from its sibling files. allow-scripts (never paired with
+    // allow-same-origin) lets a screen's own JS run in an opaque-origin sandbox.
+    f.setAttribute('sandbox', 'allow-scripts');
+    f.srcdoc = srcdoc;
+    wrap.appendChild(f);
+    var link = document.createElement('p');
+    link.className = 'frame-link';
+    var a = document.createElement('a');
+    a.href = '#';
+    a.textContent = 'open ' + (label || 'screen') + ' ↗';
+    // open full-size via a blob URL — portable, no dependency on a sibling file
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var url = URL.createObjectURL(new Blob([srcdoc], { type: 'text/html' }));
+      window.open(url, '_blank', 'noopener');
+    });
+    link.appendChild(a);
+    wrap.appendChild(link);
+    return wrap;
+  }
+
+  function runMermaid() {
+    if (window.__mermaid) {
+      try { window.__mermaid.run({ querySelector: '#pane .mermaid' }); } catch (e) {}
+    }
+  }
+  document.addEventListener('mermaid-ready', runMermaid);
+
+  function render(id, tabSlug) {
+    var a = byId[id];
+    pane.innerHTML = '';
+    if (!a) { pane.innerHTML = '<div class="placeholder">Artifact not found.</div>'; return; }
+    if (a.status === 'pending') {
+      pane.innerHTML = '<div class="placeholder">Step ' + (a.step || '') +
+        ' — not yet generated. Re-run the report after this step completes.</div>';
+      return;
+    }
+
+    // sub-tabs: a step with >1 part shows a tab row; only the active tab's
+    // parts render, so a long step is never one giant scroll.
+    var tabs = a.tabs || [];
+    var activeTab = null;
+    if (tabs.length > 1) {
+      var known = tabs.some(function (t) { return t.slug === tabSlug; });
+      activeTab = known ? tabSlug : tabs[0].slug;
+      var tabRow = document.createElement('div');
+      tabRow.className = 'tabs';
+      tabs.forEach(function (t) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'tab' + (t.slug === activeTab ? ' active' : '');
+        btn.textContent = t.label;
+        btn.addEventListener('click', function () { location.hash = id + '/' + t.slug; });
+        tabRow.appendChild(btn);
+      });
+      pane.appendChild(tabRow);
+    }
+
+    (a.parts || []).forEach(function (part) {
+      if (activeTab && part.tabSlug !== activeTab) return;
+      var label = document.createElement('div');
+      label.className = 'part-label';
+      label.textContent = part.label || '';
+      pane.appendChild(label);
+      if (part.kind === 'md') pane.appendChild(renderMarkdown(part.content || ''));
+      else if (part.kind === 'code') pane.appendChild(renderCode(part.content || '', part.lang));
+      else if (part.kind === 'iframe') pane.appendChild(renderFrame(part.srcdoc || '', part.label));
+      else {
+        var miss = document.createElement('div');
+        miss.className = 'placeholder';
+        miss.textContent = '(missing)';
+        pane.appendChild(miss);
+      }
+    });
+    runMermaid();
+  }
+
+  // --- navigation: the URL hash is the single source of truth ---
+  var items = document.querySelectorAll('.nav-item');
+  var sidebar = document.querySelector('.sidebar');
+
+  function setActive(id) {
+    items.forEach(function (b) { b.classList.toggle('active', b.dataset.id === id); });
+  }
+  // hash grammar: '#<artifact-id>' or '#<artifact-id>/<tab-slug>'
+  function parseHash() {
+    var raw = (location.hash || '').replace(/^#/, '');
+    var slash = raw.indexOf('/');
+    return slash === -1
+      ? { id: raw, tab: null }
+      : { id: raw.slice(0, slash), tab: raw.slice(slash + 1) };
+  }
+  function openArtifact(id, tab) {
+    if (!byId[id]) return false;
+    setActive(id);
+    render(id, tab);
+    window.scrollTo(0, 0);
+    return true;
+  }
+  function closeNav() { sidebar.classList.remove('open'); }
+
+  items.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.dataset.id;
+      closeNav();
+      // setting location.hash fires 'hashchange', which does the render;
+      // re-clicking the current artifact won't fire it, so render directly.
+      // a sidebar click resets to the step's first tab ('#id', no tab slug).
+      if (location.hash === '#' + id) openArtifact(id, null);
+      else location.hash = id;
+    });
+  });
+
+  // QA finding #2 — hashchange covers back/forward + manual address-bar edits
+  window.addEventListener('hashchange', function () {
+    var h = parseHash();
+    if (!openArtifact(h.id, h.tab)) {
+      var fb = document.querySelector('.nav-item');
+      if (fb) openArtifact(fb.dataset.id, null);
+    }
+  });
+
+  // QA finding #1 — mobile nav drawer toggle
+  document.getElementById('nav-toggle').addEventListener('click', function () {
+    sidebar.classList.toggle('open');
+  });
+  document.getElementById('backdrop').addEventListener('click', closeNav);
+
+  // coverage bar
+  var covfill = document.getElementById('covfill');
+  if (covfill && typeof DATA.coverage_pct === 'number') covfill.style.width = DATA.coverage_pct + '%';
+
+  // theme toggle
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    var root = document.documentElement;
+    var dark = root.dataset.theme === 'dark';
+    root.dataset.theme = dark ? 'light' : 'dark';
+    document.getElementById('hljs-theme').href =
+      'https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/styles/github' +
+      (dark ? '' : '-dark') + '.min.css';
+  });
+
+  // initial view: the artifact (+tab) named in the URL hash, else the first available one
+  var initial = parseHash();
+  if (byId[initial.id]) {
+    openArtifact(initial.id, initial.tab);
+  } else {
+    var first = document.querySelector('.nav-item[data-status="ok"]') || document.querySelector('.nav-item');
+    if (first) {
+      openArtifact(first.dataset.id, null);
+      if (history.replaceState) history.replaceState(null, '', '#' + first.dataset.id);
+    }
+  }
+})();
+</script>
+
+</body>
+</html>

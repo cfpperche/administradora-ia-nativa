@@ -1,0 +1,35 @@
+---
+# REQUIRED: kebab-case, 1-64 chars, lowercase + digits + hyphens; must match parent dir name
+name: {{SLUG}}
+# REQUIRED: ≤1024 chars; lead with verb-object + "Use when …"; see references/description-best-practices.md
+description: {{DESCRIPTION_PLACEHOLDER}}
+# OPTIONAL: short license name or pointer to bundled file
+license: MIT
+# Designed for Claude Code: body references .claude/ conventional paths and CC-specific tools
+compatibility: Designed for Claude Code. Body references `.claude/` conventional paths and CC-specific tools; portable to any runtime that maps a `.claude/`-analog directory and surfaces the referenced tools.
+# Agent0 metadata: kebab-namespaced custom keys
+metadata:
+  agent0-portability-tier: cc-native
+  version: "0.1"
+# CC extension: slash-command typing hint (top-level — CC reads it here only)
+argument-hint: {{ARGUMENT_HINT_PLACEHOLDER}}
+---
+
+# /{{SLUG}} — {{TITLE_PLACEHOLDER}}
+
+{{OPENING_PARAGRAPH_PLACEHOLDER}}
+
+See `.claude/rules/<topic>.md` for the boundary cases this skill enforces (optional cross-link).
+
+## Argument parsing
+
+User invokes as `/{{SLUG}} <subcommand> [args]`. The raw argument string is `$ARGUMENTS`. Parse it yourself; harness positional substitution differs between slash and Skill tool invocations.
+
+## Subcommand: `<first-subcommand>`
+
+{{SUBCOMMAND_BODY_PLACEHOLDER}}
+
+## Notes
+
+- This skill is `cc-native` — body uses `.claude/` paths and CC-specific tools. Not portable to other runtimes without rewriting the body.
+- Skill compliance: run `bash .claude/skills/skill/scripts/validate.sh .claude/skills/{{SLUG}}` to verify the frontmatter passes Agent0's spec-snapshot rules.

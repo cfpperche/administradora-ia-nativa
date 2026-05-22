@@ -1,0 +1,62 @@
+open-design vendor — attribution notices
+========================================
+
+This vendor snapshot includes content from multiple upstream sources.
+Each section lists the license governing that content tree.
+
+---
+
+1. Root content (skills/, prompts/, frames/, templates/ — excluding items below)
+   License: Apache License, Version 2.0
+   Source:  https://github.com/nexu-io/open-design (commit 454e8373fb2ac3362a3ed20374bd5709d5839c7a)
+   Copyright: nexu-io/open-design contributors
+
+   A copy of the Apache License 2.0 is provided in ./LICENSE.
+
+---
+
+2. skills/guizang-ppt/ subtree
+   License: MIT
+   Source:  https://github.com/nexu-io/open-design/tree/main/skills/guizang-ppt
+   Author:  op7418 and guizang-ppt contributors
+
+   MIT License
+
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   copies of the Software, and to permit persons to whom the Software is
+   furnished to do so, subject to the following conditions:
+
+   The above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software.
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE.
+
+---
+
+3. design-systems/ derivatives
+   License: MIT
+   Sources: VoltAgent/awesome-design-md and linked DESIGN.md contributors
+            https://github.com/VoltAgent/awesome-design-md
+
+   Content under .anthill/design-systems/ is derived from community-contributed
+   DESIGN.md files aggregated by VoltAgent/awesome-design-md and other
+   awesome-design-md format contributors. These files are distributed under the
+   MIT License by their respective authors.
+
+   MIT License applies as stated per each upstream source. No single copyright
+   holder is specified for the aggregate collection; attribution is to the
+   individual DESIGN.md authors as reflected in upstream commit history.
+
+---
+
+For the canonical list of vendored paths and their per-path license attribution,
+see ./MANIFEST.json (license_attribution array).

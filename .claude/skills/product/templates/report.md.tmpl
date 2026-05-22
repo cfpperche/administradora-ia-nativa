@@ -1,0 +1,128 @@
+# Product foundation REPORT — {{SLUG}}
+
+_Generated {{DATE}} · stack {{STACK}} · pipeline coverage {{N_STEPS_COMPLETED}}/15_
+
+`/product` v0.4.0 run (spec 066). This is a **docs-first foundation, not a runnable app** — the visual contract (Phase 4) hands off to SDD specs (Phase 5); the engineering build runs those specs. See `docs/specs/066-product-ui-quality/` for the skill design.
+
+## Pipeline coverage (per-step status)
+
+| # | Step | Status | Output | Size |
+|---|---|---|---|---|
+| 01 | Ideation | {{step_01_status}} | `concept-brief.md` | {{step_01_size}} |
+| 02 | Prototype v1 (lo-fi mood) | {{step_02_status}} | `direction-a.html` + `screens/` × {{step_02_screen_count}} | {{step_02_size}} |
+| 03 | Spec | {{step_03_status}} | `functional-spec.md` | {{step_03_size}} |
+| 04 | UX Testing | {{step_04_status}} | `validation-report.md` ({{step_04_findings_count}} findings) | {{step_04_size}} |
+| 05 | PRD | {{step_05_status}} | `prd/v1.md` ({{step_05_us_count}} user stories) | {{step_05_size}} |
+| 06 | OST | {{step_06_status}} | `ost.md` | {{step_06_size}} |
+| 07 | Sitemap-IA | {{step_07_status}} | `sitemap.yaml` ({{step_07_route_count}} routes) | {{step_07_size}} |
+| 08 | System Design | {{step_08_status}} | `system-design.md` + `security.md` + `data-flow.json` | {{step_08_size}} |
+| 09 | Legal posture | {{step_09_status}} | `legal-posture.md` | {{step_09_size}} |
+| 10 | Roadmap | {{step_10_status}} | `roadmap.md` ({{step_10_phase_count}} phases) | {{step_10_size}} |
+| 11 | Cost Estimate | {{step_11_status}} | `cost-estimate.md` | {{step_11_size}} |
+| 12 | GTM-launch | {{step_12_status}} | `gtm-launch.md` | {{step_12_size}} |
+| 13 | Brand | {{step_13_status}} | `brand-book.md` | {{step_13_size}} |
+| 14 | Design System | {{step_14_status}} | `design-system/{tokens.css, components.md, README.md}` | {{step_14_size}} |
+| 15 | Visual contract | {{step_15_status}} | `screen-atlas.md` + `screens/hifi/` × {{hifi_screen_count}} + `fixture-spec.md` | {{step_15_size}} |
+
+**Status legend:** ✓ ok · ◐ partial (warnings) · ✗ blocked (reason in `## Blocked steps`).
+
+## Gate-pass log
+
+| Phase | Gate | User choice | Iterations |
+|---|---|---|---|
+| 1 — Discovery | after steps 01-04 | {{gate_discovery_choice}} | {{gate_discovery_iterations}} |
+| 2 — Specification | after steps 05-12 | {{gate_specification_choice}} | {{gate_specification_iterations}} |
+| 3 — Identity | after steps 13-14 | {{gate_identity_choice}} | {{gate_identity_iterations}} |
+| 4 — Visual contract | (no gate) | — | — |
+| 5 — SDD handoff | (no gate; terminal) | — | — |
+
+## Quality concerns
+
+_The quality judge (spec 075) grades each step's artifact(s) against the step's rubric — structure, completeness, and scope-aware right-sizing. This section lists every `concern` and `fail` verdict (clean `pass` verdicts are omitted); each entry names the judge-unit, the flagged criterion, and the judge's one-line `note`, alongside the unit's `scope_assessment`. A `fail` pre-set the phase gate's recommended option to `iterate`; a Phase 4 `fail` (15a/15b/15c — no gate) surfaces here only. Empty when every judge-unit passed clean._
+
+{{quality_concerns_section}}
+
+## Blocked steps
+
+_Empty when no steps blocked. Each entry: step label + reason + partial artifacts (if any)._
+
+{{blocked_steps_section}}
+
+## Coverage scorecard
+
+The atlas § Screens Index indexes every `sitemap.yaml` route. Per-category counts:
+
+| Category | Sitemap routes | In atlas Screens Index | Notes |
+|---|---|---|---|
+| marketing | {{marketing_count}} | {{marketing_in_atlas}} | {{marketing_note}} |
+| auth | {{auth_count}} | {{auth_in_atlas}} | {{auth_note}} |
+| primary | {{primary_count}} | {{primary_in_atlas}} | {{primary_note}} |
+| admin | {{admin_count}} | {{admin_in_atlas}} | {{admin_note}} |
+| error | {{error_count}} | {{error_in_atlas}} | {{error_note}} |
+
+## PRD coverage matrix
+
+Every US-NN from `prd/v1.md` is mapped in the atlas § PRD Coverage Matrix (covered → route(s), or deferred → reason).
+
+**Coverage:** {{n_covered}} covered · {{n_deferred}} deferred (with reasons) · {{n_missing}} missing (gate failure if > 0)
+
+## Visual contract
+
+| Sub-step | Artifact | Status |
+|---|---|---|
+| 15a — Screen atlas | `docs/screen-atlas.md` | {{atlas_status}} |
+| 15b — Hi-fi killer-flow mood | `docs/screens/hifi/` × {{hifi_screen_count}} | {{hifi_status}} |
+| 15c — Fixture spec | `docs/fixture-spec.md` | {{fixture_status}} |
+
+## Visual check (best-effort Playwright)
+
+_If the Playwright MCP was loaded this session, each hi-fi mood screen was screenshotted at 375 px + 1280 px and probed for horizontal overflow (`scrollWidth > clientWidth`). If not loaded, this section records `visual-gate-skipped` — `<out>/.mcp.json` is seeded for the next session._
+
+{{visual_check_section}}
+
+| Hi-fi screen | 375 px | 1280 px | Horizontal overflow |
+|---|---|---|---|
+| {{hifi_1_name}} | {{hifi_1_375}} | {{hifi_1_1280}} | {{hifi_1_overflow}} |
+| {{hifi_2_name}} | {{hifi_2_375}} | {{hifi_2_1280}} | {{hifi_2_overflow}} |
+| ... | ... | ... | ... |
+
+## SDD handoff
+
+The engineering build runs as SDD specs scaffolded under `docs/specs/`. `/product` does NOT generate a runnable app.
+
+| Spec | Path | Role |
+|---|---|---|
+| Umbrella | `docs/specs/001-{{SLUG}}/` | `Type: umbrella` — tracks the whole v1 build via a child-spec matrix |
+| Child #1 — foundation | `docs/specs/002-foundation/` | skeleton + tooling + route-group dirs + thin layout shells — **start here** |
+| Children #2..N | (umbrella child-spec matrix) | component-library + per-roadmap-phase children — materialize via `/sdd new <slug>` |
+
+## Iteration log
+
+_Entries appended when the user picked `iterate` at any gate. Empty when no iterations occurred._
+
+{{iteration_log_section}}
+
+## Dogfood findings (optional)
+
+_Template bugs, skill body gaps, or platform surprises surfaced during this run. Empty if none. Each entry actionable (file + line + suggested fix)._
+
+{{dogfood_findings_section}}
+
+## Wall-clock summary
+
+| Phase | Started | Completed | Duration |
+|---|---|---|---|
+| Phase 1 — Discovery | {{p1_start}} | {{p1_end}} | {{p1_dur}} |
+| Phase 2 — Specification | {{p2_start}} | {{p2_end}} | {{p2_dur}} |
+| Phase 3 — Identity | {{p3_start}} | {{p3_end}} | {{p3_dur}} |
+| Phase 4 — Visual contract | {{p4_start}} | {{p4_end}} | {{p4_dur}} |
+| Phase 5 — SDD handoff | {{p5_start}} | {{p5_end}} | {{p5_dur}} |
+| **Total** | {{started_at}} | {{completed_at}} | **{{total_duration}}** |
+
+## Next steps
+
+1. Open `docs/screen-atlas.md` — the visual contract. Skim `docs/screens/hifi/` for the rendered killer flow.
+2. Work the foundation child: `docs/specs/002-foundation/` — run `/sdd plan`, then `/sdd tasks`, then implement.
+3. Materialize each umbrella child-matrix row via `/sdd new <phase-slug>` as you reach it. Child #2 (component-library) reads `docs/design-system/components.md` as its input spec.
+4. Review `## Blocked steps` if non-empty — re-dispatch the affected step via `/product "<idea>" --from-step=NN --out={{out_dir}}`.
+5. Apply `## Dogfood findings` back to `.claude/skills/product/` if any items surfaced.

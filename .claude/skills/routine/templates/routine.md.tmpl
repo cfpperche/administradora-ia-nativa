@@ -1,0 +1,38 @@
+---
+name: {{SLUG}}
+schedule: "0 9 * * *"
+idempotent: true
+on-stale: warn
+stale-after-days: 7
+---
+
+# Prompt
+
+_Replace with the prompt body. Available interpolation placeholders:_
+_  {{LAST_COMPLETED_TS}} — ISO-8601 of last successful run, or "never"_
+_  {{GIT_HEAD}}           — git rev-parse HEAD at enqueue time_
+_  {{REPO_ROOT}}          — absolute repo path_
+_  {{NOW}}                — ISO-8601 at enqueue time_
+
+Example body (delete and replace):
+
+Audit `.claude/memory/cc-platform-hooks.md` against Claude Code release
+notes published since {{LAST_COMPLETED_TS}}. For each documented change
+not yet reflected in the memo, propose a one-line edit.
+
+# Done when
+
+_Replace with the contract — what the dispatched session must produce
+for the routine to count as done. Be specific; this is the verifier._
+
+Example (delete and replace):
+
+- Either an edit applied to `.claude/memory/cc-platform-hooks.md`,
+  OR a single message `no-drift-detected` written to the chat.
+- `.claude/.routines-state/{{SLUG}}/completed/<ts>.md` materialized
+  (handled automatically by /routine run; nothing to do here).
+
+<!--
+Scaffold created {{DATE}} via /routine new {{SLUG}}.
+See .claude/rules/routines.md for full discipline + frontmatter reference.
+-->

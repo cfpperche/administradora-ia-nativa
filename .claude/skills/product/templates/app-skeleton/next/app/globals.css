@@ -1,0 +1,7 @@
+@import "../docs/design-system/tokens.css";
+@import "tailwindcss";
+
+/* tokens.css is written by /product Step 14 (a Tailwind v4 @theme block) into
+   <out>/docs/design-system/tokens.css. The SDD foundation child (002-foundation)
+   owns this @import. The relative ../docs/ path assumes the app is rooted at
+   <out>/, sibling to docs/ — see references/sdd-handoff.md § Child #1. */

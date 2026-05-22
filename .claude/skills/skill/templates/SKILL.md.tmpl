@@ -1,0 +1,30 @@
+---
+# REQUIRED: kebab-case, 1-64 chars, lowercase + digits + hyphens; must match parent dir name
+name: {{SLUG}}
+# REQUIRED: ≤1024 chars; lead with verb-object + "Use when …"; see references/description-best-practices.md
+description: {{DESCRIPTION_PLACEHOLDER}}
+# OPTIONAL: short license name or pointer to bundled file
+license: MIT
+# OPTIONAL: ≤500 chars; declare env / product / package requirements. Omit if none.
+compatibility: {{COMPATIBILITY_PLACEHOLDER}}
+# OPTIONAL: arbitrary metadata; Agent0 convention uses kebab-namespaced keys (agent0-*)
+metadata:
+  agent0-portability-tier: {{TIER_PLACEHOLDER}}  # cc-native | agentskills-portable | runtime-agnostic
+  version: "0.1"
+---
+
+# /{{SLUG}} — {{TITLE_PLACEHOLDER}}
+
+{{OPENING_PARAGRAPH_PLACEHOLDER}}
+
+## Argument parsing
+
+User invokes as `/{{SLUG}} <args>`. The raw argument string is `$ARGUMENTS`. Parse it directly (don't rely on `$1`/`$2`); harness substitution differs between slash invocation and Skill tool invocation.
+
+## Subcommand: `<first-subcommand>`
+
+{{SUBCOMMAND_BODY_PLACEHOLDER}}
+
+## Notes
+
+- {{NOTE_1_PLACEHOLDER}}

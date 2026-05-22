@@ -1,0 +1,176 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/cfpperche/Agent0/.claude/skills/product/schemas/od-vendor-manifest.schema.json",
+  "title": "OD Vendor Manifest",
+  "description": "Tracks the vendored open-design snapshot: pinned SHA, vendored paths, license attribution, and sync history.",
+  "type": "object",
+  "required": [
+    "upstream_url",
+    "pinned_sha",
+    "pinned_at",
+    "last_check_sha",
+    "last_check_at",
+    "vendored_paths",
+    "license_attribution",
+    "history"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri"
+    },
+    "upstream_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URL of the upstream repository."
+    },
+    "pinned_sha": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$",
+          "description": "40-character lowercase hex SHA of the pinned commit."
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pinned_at": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 datetime when this SHA was last pinned."
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "last_check_sha": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$",
+          "description": "SHA of the most recent upstream HEAD check (may differ from pinned_sha)."
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "last_check_at": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 datetime of the most recent upstream HEAD check."
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vendored_paths": {
+      "type": "array",
+      "description": "Paths extracted from the upstream tarball into this repo.",
+      "items": {
+        "type": "object",
+        "required": ["src", "dst", "kind"],
+        "additionalProperties": false,
+        "properties": {
+          "src": {
+            "type": "string",
+            "description": "Path within the upstream tarball (relative to repo root)."
+          },
+          "dst": {
+            "type": "string",
+            "description": "Destination path within this repo (relative to repo root)."
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "design-system-tree",
+              "skill-bundle-tree",
+              "prompt-source",
+              "frame-asset",
+              "template-asset",
+              "single-file"
+            ],
+            "description": "Category of vendored content."
+          },
+          "recursive": {
+            "type": "boolean",
+            "description": "Whether the entire subtree was copied (true) or only the named file (false)."
+          },
+          "checksum": {
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "SHA-256 hex checksum of the vendored content at apply time."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "license_attribution": {
+      "type": "array",
+      "description": "Per-path license attribution records.",
+      "items": {
+        "type": "object",
+        "required": ["path", "license", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path glob or specific file this attribution applies to."
+          },
+          "license": {
+            "type": "string",
+            "description": "SPDX license identifier (e.g. Apache-2.0, MIT)."
+          },
+          "source": {
+            "type": "string",
+            "description": "URL to the upstream license file or repository."
+          }
+        }
+      }
+    },
+    "history": {
+      "type": "array",
+      "description": "Append-only log of sync events.",
+      "items": {
+        "type": "object",
+        "required": ["event", "sha", "at", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "event": {
+            "type": "string",
+            "enum": ["bump", "apply", "check"],
+            "description": "bump = SHA pinned; apply = content extracted; check = upstream HEAD checked."
+          },
+          "sha": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$",
+            "description": "40-character lowercase hex SHA relevant to this event."
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime of this event."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Human-readable note explaining why this event occurred."
+          }
+        }
+      }
+    }
+  }
+}

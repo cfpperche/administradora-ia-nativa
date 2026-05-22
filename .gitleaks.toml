@@ -1,0 +1,34 @@
+# Starter gitleaks config for Agent0.
+#
+# This file is consumed by the `gitleaks protect --staged` invocation inside
+# `.claude/hooks/secrets-scan.sh` (the PreToolUse(Bash) gate that intercepts
+# `git commit`). The discipline — when the scan fires, override grammar,
+# allowlist mechanics, escape hatch, gotchas — is documented in
+# `.claude/rules/secrets-scan.md`. Read that first before editing this file.
+#
+# `[extend].useDefault = true` inherits gitleaks' built-in detector ruleset
+# (AWS keys, GitHub tokens, private keys, JWTs, etc.). Project-specific
+# allowlists go in the `[allowlist]` table below.
+
+[extend]
+useDefault = true
+
+# Singular `[allowlist]` — NOT `[[allowlists]]`. The plural array-of-tables form
+# is silently ignored by gitleaks 8.21.x (it parses without error but the
+# paths/regexes/commits exemptions never apply); do not "modernise" it.
+# See .claude/rules/secrets-scan.md § Allowlist mechanics for grammar.
+#
+# Two path exemptions, both required by every fork:
+#  1. secrets-scan.md ships synthetic AKIA/ghp fake credentials documenting the
+#     discipline itself — a fresh fork's first commit would block without this.
+#  2. harness-sync-baseline.json is a machine-generated manifest of
+#     sha256 content hashes; gitleaks' generic-API-key rule flags 64-hex strings.
+#     The file is git-tracked by design (travels on clone) and re-committed on
+#     every harness sync, so the exemption is permanent, not one-off.
+# Add more `paths` / `regexes` / `commits` as real exemptions arise.
+[allowlist]
+description = "false-positive exemptions — synthetic fake credentials in docs, machine-generated hash manifests"
+paths = [
+  '''secrets-scan\.md''',
+  '''harness-sync-baseline\.json''',
+]

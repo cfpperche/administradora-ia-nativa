@@ -1,0 +1,511 @@
+{
+  "version": 1,
+  "snapshot_date": "2026-05-18",
+  "source": ".claude/skills/product/design-systems/",
+  "vendors": [
+    {
+      "name": "airbnb",
+      "category": "E-Commerce & Retail",
+      "mood": "Travel marketplace. Warm coral accent, photography-driven, rounded UI.",
+      "palette_primary": "Rausch (#ff385c)",
+      "vendor_path": ".claude/skills/product/design-systems/airbnb/DESIGN.md"
+    },
+    {
+      "name": "airtable",
+      "category": "Design & Creative",
+      "mood": "Spreadsheet-database hybrid. Colorful, friendly, structured data aesthetic.",
+      "palette_primary": "Deep Navy (#181d26)",
+      "vendor_path": ".claude/skills/product/design-systems/airtable/DESIGN.md"
+    },
+    {
+      "name": "apple",
+      "category": "Media & Consumer",
+      "mood": "Consumer electronics. Premium white space, SF Pro, cinematic imagery.",
+      "palette_primary": "Absolute Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/apple/DESIGN.md"
+    },
+    {
+      "name": "binance",
+      "category": "Fintech & Crypto",
+      "mood": "Crypto exchange. Bold yellow accent on monochrome, trading-floor urgency.",
+      "palette_primary": "Binance Yellow (#F0B90B)",
+      "vendor_path": ".claude/skills/product/design-systems/binance/DESIGN.md"
+    },
+    {
+      "name": "bmw",
+      "category": "Automotive",
+      "mood": "Luxury automotive. Dark premium surfaces, precise German engineering aesthetic.",
+      "palette_primary": "Pure White (#ffffff)",
+      "vendor_path": ".claude/skills/product/design-systems/bmw/DESIGN.md"
+    },
+    {
+      "name": "bugatti",
+      "category": "Automotive",
+      "mood": "Hypercar brand. Cinema-black canvas, monochrome austerity, monumental display type.",
+      "palette_primary": "Velvet Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/bugatti/DESIGN.md"
+    },
+    {
+      "name": "cal",
+      "category": "Productivity & SaaS",
+      "mood": "Open-source scheduling. Clean neutral UI, developer-oriented simplicity.",
+      "palette_primary": "Charcoal (#242424)",
+      "vendor_path": ".claude/skills/product/design-systems/cal/DESIGN.md"
+    },
+    {
+      "name": "claude",
+      "category": "AI & LLM",
+      "mood": "Anthropic's AI assistant. Warm terracotta accent, clean editorial layout.",
+      "palette_primary": "Anthropic Near Black (#141413)",
+      "vendor_path": ".claude/skills/product/design-systems/claude/DESIGN.md"
+    },
+    {
+      "name": "clay",
+      "category": "Design & Creative",
+      "mood": "Creative agency. Organic shapes, soft gradients, art-directed layout.",
+      "palette_primary": "Clay Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/clay/DESIGN.md"
+    },
+    {
+      "name": "clickhouse",
+      "category": "Backend & Data",
+      "mood": "Fast analytics database. Yellow-accented, technical documentation style.",
+      "palette_primary": "Neon Volt (#faff69)",
+      "vendor_path": ".claude/skills/product/design-systems/clickhouse/DESIGN.md"
+    },
+    {
+      "name": "cohere",
+      "category": "AI & LLM",
+      "mood": "Enterprise AI platform. Vibrant gradients, data-rich dashboard aesthetic.",
+      "palette_primary": "Cohere Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/cohere/DESIGN.md"
+    },
+    {
+      "name": "coinbase",
+      "category": "Fintech & Crypto",
+      "mood": "Crypto exchange. Clean blue identity, trust-focused, institutional feel.",
+      "palette_primary": "Coinbase Blue (#0052ff)",
+      "vendor_path": ".claude/skills/product/design-systems/coinbase/DESIGN.md"
+    },
+    {
+      "name": "composio",
+      "category": "Backend & Data",
+      "mood": "Tool integration platform. Modern dark with colorful integration icons.",
+      "palette_primary": "Composio Cobalt (#0007cd)",
+      "vendor_path": ".claude/skills/product/design-systems/composio/DESIGN.md"
+    },
+    {
+      "name": "cursor",
+      "category": "Developer Tools",
+      "mood": "AI-first code editor. Sleek dark interface, gradient accents.",
+      "palette_primary": "Cursor Dark (#26251e)",
+      "vendor_path": ".claude/skills/product/design-systems/cursor/DESIGN.md"
+    },
+    {
+      "name": "default",
+      "category": "Starter",
+      "mood": "A clean, product-oriented default. Use when the brief doesn't call for a",
+      "palette_primary": null,
+      "vendor_path": ".claude/skills/product/design-systems/default/DESIGN.md"
+    },
+    {
+      "name": "elevenlabs",
+      "category": "AI & LLM",
+      "mood": "AI voice platform. Dark cinematic UI, audio-waveform aesthetics.",
+      "palette_primary": "Pure White (#ffffff)",
+      "vendor_path": ".claude/skills/product/design-systems/elevenlabs/DESIGN.md"
+    },
+    {
+      "name": "expo",
+      "category": "Developer Tools",
+      "mood": "React Native platform. Dark theme, tight letter-spacing, code-centric.",
+      "palette_primary": "Expo Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/expo/DESIGN.md"
+    },
+    {
+      "name": "ferrari",
+      "category": "Automotive",
+      "mood": "Luxury automotive. Chiaroscuro editorial, Ferrari Red accents, cinematic black.",
+      "palette_primary": "Ferrari Red (#DA291C)",
+      "vendor_path": ".claude/skills/product/design-systems/ferrari/DESIGN.md"
+    },
+    {
+      "name": "figma",
+      "category": "Design & Creative",
+      "mood": "Collaborative design tool. Vibrant multi-color, playful yet professional.",
+      "palette_primary": "Pure Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/figma/DESIGN.md"
+    },
+    {
+      "name": "framer",
+      "category": "Design & Creative",
+      "mood": "Website builder. Bold black and blue, motion-first, design-forward.",
+      "palette_primary": "Pure Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/framer/DESIGN.md"
+    },
+    {
+      "name": "hashicorp",
+      "category": "Backend & Data",
+      "mood": "Infrastructure automation. Enterprise-clean, black and white.",
+      "palette_primary": "Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/hashicorp/DESIGN.md"
+    },
+    {
+      "name": "ibm",
+      "category": "Media & Consumer",
+      "mood": "Enterprise technology. Carbon design system, structured blue palette.",
+      "palette_primary": "IBM Blue 60 (#0f62fe)",
+      "vendor_path": ".claude/skills/product/design-systems/ibm/DESIGN.md"
+    },
+    {
+      "name": "intercom",
+      "category": "Productivity & SaaS",
+      "mood": "Customer messaging. Friendly blue palette, conversational UI patterns.",
+      "palette_primary": "Off Black (#111111)",
+      "vendor_path": ".claude/skills/product/design-systems/intercom/DESIGN.md"
+    },
+    {
+      "name": "kraken",
+      "category": "Fintech & Crypto",
+      "mood": "Crypto trading. Purple-accented dark UI, data-dense dashboards.",
+      "palette_primary": "Kraken Purple (#7132f5)",
+      "vendor_path": ".claude/skills/product/design-systems/kraken/DESIGN.md"
+    },
+    {
+      "name": "lamborghini",
+      "category": "Automotive",
+      "mood": "Supercar brand. True black surfaces, gold accents, dramatic uppercase typography.",
+      "palette_primary": "Lamborghini Gold (#FFC000)",
+      "vendor_path": ".claude/skills/product/design-systems/lamborghini/DESIGN.md"
+    },
+    {
+      "name": "linear-app",
+      "category": "Productivity & SaaS",
+      "mood": "Project management. Ultra-minimal, precise, purple accent.",
+      "palette_primary": "Panel Dark (#0f1011)",
+      "vendor_path": ".claude/skills/product/design-systems/linear-app/DESIGN.md"
+    },
+    {
+      "name": "lovable",
+      "category": "Developer Tools",
+      "mood": "AI full-stack builder. Playful gradients, friendly dev aesthetic.",
+      "palette_primary": "Cream (#f7f4ed)",
+      "vendor_path": ".claude/skills/product/design-systems/lovable/DESIGN.md"
+    },
+    {
+      "name": "mastercard",
+      "category": "Fintech & Crypto",
+      "mood": "Global payments network. Warm cream canvas, orbital pill shapes, editorial warmth.",
+      "palette_primary": "Mastercard Red (#EB001B)",
+      "vendor_path": ".claude/skills/product/design-systems/mastercard/DESIGN.md"
+    },
+    {
+      "name": "meta",
+      "category": "E-Commerce & Retail",
+      "mood": "Tech retail store. Photography-first, binary light/dark surfaces, Meta Blue CTAs.",
+      "palette_primary": "Meta Blue (#0064E0)",
+      "vendor_path": ".claude/skills/product/design-systems/meta/DESIGN.md"
+    },
+    {
+      "name": "minimax",
+      "category": "AI & LLM",
+      "mood": "AI model provider. Bold dark interface with neon accents.",
+      "palette_primary": "Brand Blue (#1456f0)",
+      "vendor_path": ".claude/skills/product/design-systems/minimax/DESIGN.md"
+    },
+    {
+      "name": "mintlify",
+      "category": "Productivity & SaaS",
+      "mood": "Documentation platform. Clean, green-accented, reading-optimized.",
+      "palette_primary": "Near Black (#0d0d0d)",
+      "vendor_path": ".claude/skills/product/design-systems/mintlify/DESIGN.md"
+    },
+    {
+      "name": "miro",
+      "category": "Design & Creative",
+      "mood": "Visual collaboration. Bright yellow accent, infinite canvas aesthetic.",
+      "palette_primary": "Near Black (#1c1c1e)",
+      "vendor_path": ".claude/skills/product/design-systems/miro/DESIGN.md"
+    },
+    {
+      "name": "mistral-ai",
+      "category": "AI & LLM",
+      "mood": "Open-weight LLM provider. French-engineered minimalism, purple-toned.",
+      "palette_primary": "Mistral Orange (#fa520f)",
+      "vendor_path": ".claude/skills/product/design-systems/mistral-ai/DESIGN.md"
+    },
+    {
+      "name": "mongodb",
+      "category": "Backend & Data",
+      "mood": "Document database. Green leaf branding, developer documentation focus.",
+      "palette_primary": "Forest Black (#001e2b)",
+      "vendor_path": ".claude/skills/product/design-systems/mongodb/DESIGN.md"
+    },
+    {
+      "name": "nike",
+      "category": "E-Commerce & Retail",
+      "mood": "Athletic retail. Monochrome UI, massive uppercase type, full-bleed photography.",
+      "palette_primary": "Nike Black (#111111)",
+      "vendor_path": ".claude/skills/product/design-systems/nike/DESIGN.md"
+    },
+    {
+      "name": "notion",
+      "category": "Productivity & SaaS",
+      "mood": "All-in-one workspace. Warm minimalism, serif headings, soft surfaces.",
+      "palette_primary": "Pure White (#ffffff)",
+      "vendor_path": ".claude/skills/product/design-systems/notion/DESIGN.md"
+    },
+    {
+      "name": "nvidia",
+      "category": "Media & Consumer",
+      "mood": "GPU computing. Green-black energy, technical power aesthetic.",
+      "palette_primary": "NVIDIA Green (#76b900)",
+      "vendor_path": ".claude/skills/product/design-systems/nvidia/DESIGN.md"
+    },
+    {
+      "name": "ollama",
+      "category": "AI & LLM",
+      "mood": "Run LLMs locally. Terminal-first, monochrome simplicity.",
+      "palette_primary": "Pure Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/ollama/DESIGN.md"
+    },
+    {
+      "name": "opencode-ai",
+      "category": "AI & LLM",
+      "mood": "AI coding platform. Developer-centric dark theme.",
+      "palette_primary": "OpenCode Dark (#201d1d)",
+      "vendor_path": ".claude/skills/product/design-systems/opencode-ai/DESIGN.md"
+    },
+    {
+      "name": "pinterest",
+      "category": "Media & Consumer",
+      "mood": "Visual discovery. Red accent, masonry grid, image-first.",
+      "palette_primary": "Pinterest Red (#e60023)",
+      "vendor_path": ".claude/skills/product/design-systems/pinterest/DESIGN.md"
+    },
+    {
+      "name": "playstation",
+      "category": "Media & Consumer",
+      "mood": "Gaming console retail. Three-surface channel layout, quiet-authority display type, cyan hover-scale.",
+      "palette_primary": "PlayStation Blue (#0070cc)",
+      "vendor_path": ".claude/skills/product/design-systems/playstation/DESIGN.md"
+    },
+    {
+      "name": "posthog",
+      "category": "Backend & Data",
+      "mood": "Product analytics. Playful hedgehog branding, developer-friendly dark UI.",
+      "palette_primary": "Olive Ink (#4d4f46)",
+      "vendor_path": ".claude/skills/product/design-systems/posthog/DESIGN.md"
+    },
+    {
+      "name": "raycast",
+      "category": "Developer Tools",
+      "mood": "Productivity launcher. Sleek dark chrome, vibrant gradient accents.",
+      "palette_primary": "Near-Black Blue (#07080a)",
+      "vendor_path": ".claude/skills/product/design-systems/raycast/DESIGN.md"
+    },
+    {
+      "name": "renault",
+      "category": "Automotive",
+      "mood": "French automotive. Vibrant aurora gradients, NouvelR typography, bold energy.",
+      "palette_primary": "Renault Yellow (#EFDF00)",
+      "vendor_path": ".claude/skills/product/design-systems/renault/DESIGN.md"
+    },
+    {
+      "name": "replicate",
+      "category": "AI & LLM",
+      "mood": "Run ML models via API. Clean white canvas, code-forward.",
+      "palette_primary": "Replicate Dark (#202020)",
+      "vendor_path": ".claude/skills/product/design-systems/replicate/DESIGN.md"
+    },
+    {
+      "name": "resend",
+      "category": "Productivity & SaaS",
+      "mood": "Email API. Minimal dark theme, monospace accents.",
+      "palette_primary": "Void Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/resend/DESIGN.md"
+    },
+    {
+      "name": "revolut",
+      "category": "Fintech & Crypto",
+      "mood": "Digital banking. Sleek dark interface, gradient cards, fintech precision.",
+      "palette_primary": "Revolut Dark (#191c1f)",
+      "vendor_path": ".claude/skills/product/design-systems/revolut/DESIGN.md"
+    },
+    {
+      "name": "runwayml",
+      "category": "AI & LLM",
+      "mood": "AI video generation. Cinematic dark UI, media-rich layout.",
+      "palette_primary": "Runway Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/runwayml/DESIGN.md"
+    },
+    {
+      "name": "sanity",
+      "category": "Backend & Data",
+      "mood": "Headless CMS. Red accent, content-first editorial layout.",
+      "palette_primary": "Sanity Black (#0b0b0b)",
+      "vendor_path": ".claude/skills/product/design-systems/sanity/DESIGN.md"
+    },
+    {
+      "name": "sentry",
+      "category": "Backend & Data",
+      "mood": "Error monitoring. Dark dashboard, data-dense, pink-purple accent.",
+      "palette_primary": "Deep Purple (#1f1633)",
+      "vendor_path": ".claude/skills/product/design-systems/sentry/DESIGN.md"
+    },
+    {
+      "name": "shopify",
+      "category": "E-Commerce & Retail",
+      "mood": "E-commerce platform. Dark-first cinematic, neon green accent, ultra-light type.",
+      "palette_primary": "Shopify White (#FFFFFF)",
+      "vendor_path": ".claude/skills/product/design-systems/shopify/DESIGN.md"
+    },
+    {
+      "name": "spacex",
+      "category": "Media & Consumer",
+      "mood": "Space technology. Stark black and white, full-bleed imagery, futuristic.",
+      "palette_primary": "Space Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/spacex/DESIGN.md"
+    },
+    {
+      "name": "spotify",
+      "category": "Media & Consumer",
+      "mood": "Music streaming. Vibrant green on dark, bold type, album-art-driven.",
+      "palette_primary": "Spotify Green (#1ed760)",
+      "vendor_path": ".claude/skills/product/design-systems/spotify/DESIGN.md"
+    },
+    {
+      "name": "starbucks",
+      "category": "E-Commerce & Retail",
+      "mood": "Global coffee retail brand. Four-tier green system, warm cream canvas, full-pill buttons.",
+      "palette_primary": "Starbucks Green (#006241)",
+      "vendor_path": ".claude/skills/product/design-systems/starbucks/DESIGN.md"
+    },
+    {
+      "name": "stripe",
+      "category": "Fintech & Crypto",
+      "mood": "Payment infrastructure. Signature purple gradients, weight-300 elegance.",
+      "palette_primary": "Stripe Purple (#533afd)",
+      "vendor_path": ".claude/skills/product/design-systems/stripe/DESIGN.md"
+    },
+    {
+      "name": "supabase",
+      "category": "Backend & Data",
+      "mood": "Open-source Firebase alternative. Dark emerald theme, code-first.",
+      "palette_primary": "Supabase Green (#3ecf8e)",
+      "vendor_path": ".claude/skills/product/design-systems/supabase/DESIGN.md"
+    },
+    {
+      "name": "superhuman",
+      "category": "Developer Tools",
+      "mood": "Fast email client. Premium dark UI, keyboard-first, purple glow.",
+      "palette_primary": "Mysteria Purple (#1b1938)",
+      "vendor_path": ".claude/skills/product/design-systems/superhuman/DESIGN.md"
+    },
+    {
+      "name": "tesla",
+      "category": "Automotive",
+      "mood": "Electric automotive. Radical subtraction, full-viewport photography, near-zero UI.",
+      "palette_primary": "Electric Blue (#3E6AE1)",
+      "vendor_path": ".claude/skills/product/design-systems/tesla/DESIGN.md"
+    },
+    {
+      "name": "theverge",
+      "category": "Media & Consumer",
+      "mood": "Tech editorial media. Acid-mint and ultraviolet accents, Manuka display, rave-flyer story tiles.",
+      "palette_primary": "Jelly Mint (#3cffd0)",
+      "vendor_path": ".claude/skills/product/design-systems/theverge/DESIGN.md"
+    },
+    {
+      "name": "together-ai",
+      "category": "AI & LLM",
+      "mood": "Open-source AI infrastructure. Technical, blueprint-style design.",
+      "palette_primary": "Brand Magenta (#ef2cc1)",
+      "vendor_path": ".claude/skills/product/design-systems/together-ai/DESIGN.md"
+    },
+    {
+      "name": "uber",
+      "category": "Media & Consumer",
+      "mood": "Mobility platform. Bold black and white, tight type, urban energy.",
+      "palette_primary": "Uber Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/uber/DESIGN.md"
+    },
+    {
+      "name": "vercel",
+      "category": "Developer Tools",
+      "mood": "Frontend deployment. Black and white precision, Geist font.",
+      "palette_primary": "Vercel Black (#171717)",
+      "vendor_path": ".claude/skills/product/design-systems/vercel/DESIGN.md"
+    },
+    {
+      "name": "vodafone",
+      "category": "Media & Consumer",
+      "mood": "Global telecom brand. Monumental uppercase display, Vodafone Red chapter bands.",
+      "palette_primary": "Vodafone Red (#e60000)",
+      "vendor_path": ".claude/skills/product/design-systems/vodafone/DESIGN.md"
+    },
+    {
+      "name": "voltagent",
+      "category": "AI & LLM",
+      "mood": "AI agent framework. Void-black canvas, emerald accent, terminal-native.",
+      "palette_primary": "Emerald Signal Green (#00d992)",
+      "vendor_path": ".claude/skills/product/design-systems/voltagent/DESIGN.md"
+    },
+    {
+      "name": "warm-editorial",
+      "category": "Starter",
+      "mood": "A serif-led magazine aesthetic. Terracotta accent on warm off-white paper \u2014",
+      "palette_primary": null,
+      "vendor_path": ".claude/skills/product/design-systems/warm-editorial/DESIGN.md"
+    },
+    {
+      "name": "warp",
+      "category": "Developer Tools",
+      "mood": "Modern terminal. Dark IDE-like interface, block-based command UI.",
+      "palette_primary": "Warm Parchment (#faf9f6)",
+      "vendor_path": ".claude/skills/product/design-systems/warp/DESIGN.md"
+    },
+    {
+      "name": "webflow",
+      "category": "Design & Creative",
+      "mood": "Visual web builder. Blue-accented, polished marketing site aesthetic.",
+      "palette_primary": "Near Black (#080808)",
+      "vendor_path": ".claude/skills/product/design-systems/webflow/DESIGN.md"
+    },
+    {
+      "name": "wired",
+      "category": "Media & Consumer",
+      "mood": "Tech magazine. Paper-white broadsheet density, custom serif display, mono kickers, ink-blue links.",
+      "palette_primary": "WIRED Black (#000000)",
+      "vendor_path": ".claude/skills/product/design-systems/wired/DESIGN.md"
+    },
+    {
+      "name": "wise",
+      "category": "Fintech & Crypto",
+      "mood": "Money transfer. Bright green accent, friendly and clear.",
+      "palette_primary": "Near Black (#0e0f0c)",
+      "vendor_path": ".claude/skills/product/design-systems/wise/DESIGN.md"
+    },
+    {
+      "name": "x-ai",
+      "category": "AI & LLM",
+      "mood": "Elon Musk's AI lab. Stark monochrome, futuristic minimalism.",
+      "palette_primary": "Pure White (#ffffff)",
+      "vendor_path": ".claude/skills/product/design-systems/x-ai/DESIGN.md"
+    },
+    {
+      "name": "xiaohongshu",
+      "category": "Media & Consumer",
+      "mood": "Lifestyle UGC social platform. Singular brand red, generous radius, content-first.",
+      "palette_primary": "Star Yellow (#FDBC5F)",
+      "vendor_path": ".claude/skills/product/design-systems/xiaohongshu/DESIGN.md"
+    },
+    {
+      "name": "zapier",
+      "category": "Productivity & SaaS",
+      "mood": "Automation platform. Warm orange, friendly illustration-driven.",
+      "palette_primary": "Zapier Black (#201515)",
+      "vendor_path": ".claude/skills/product/design-systems/zapier/DESIGN.md"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+---
+# REQUIRED: kebab-case, 1-64 chars, lowercase + digits + hyphens; must match parent dir name
+name: {{SLUG}}
+# REQUIRED: ≤1024 chars; lead with verb-object + "Use when …"; see references/description-best-practices.md
+description: {{DESCRIPTION_PLACEHOLDER}}
+# OPTIONAL: short license name or pointer to bundled file
+license: MIT
+# Compatible with any agentskills.io-compatible runtime (Claude Code, Hermes Agent, Codex, Cursor, Goose, OpenCode, others)
+compatibility: Compatible with any agentskills.io-compatible runtime (Claude Code, Hermes Agent, OpenAI Codex, Cursor, Goose, OpenCode, and ~35 others). Uses only universal primitives (file IO, shell, web).
+# Agent0 metadata: kebab-namespaced custom keys
+metadata:
+  agent0-portability-tier: agentskills-portable
+  version: "0.1"
+---
+
+# /{{SLUG}} — {{TITLE_PLACEHOLDER}}
+
+{{OPENING_PARAGRAPH_PLACEHOLDER}}
+
+## Argument parsing
+
+User invokes as `/{{SLUG}} <args>`. The raw argument string is `$ARGUMENTS`. Parse it yourself — positional substitution semantics differ across runtimes.
+
+## Subcommand: `<first-subcommand>`
+
+{{SUBCOMMAND_BODY_PLACEHOLDER}}
+
+## Notes
+
+- This skill is `agentskills-portable` — body uses only universal primitives (file IO, shell, web). Should run unchanged on any agentskills.io-compatible runtime.
+- Skill compliance: run `bash <skill-dir>/scripts/validate.sh <this-skill-dir>` (or the upstream `skills-ref validate`) to verify the frontmatter.
+- Paths resolved via `${SKILL_STATE_DIR:-.}` (or per-runtime equivalent). Do not hard-code `.claude/` in body — that would demote the skill to `cc-native`.

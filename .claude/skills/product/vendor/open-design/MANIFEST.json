@@ -1,0 +1,106 @@
+{
+  "$schema": "../../schemas/od-vendor-manifest.schema.json",
+  "upstream_url": "https://github.com/nexu-io/open-design",
+  "pinned_sha": "d25a7aaf4219d69b6a3055ddda25fbce0dafd24d",
+  "pinned_at": "2026-04-30T20:18:32.516Z",
+  "last_check_sha": "34f66113a0f2391714d081d848e7dc48a5222de0",
+  "last_check_at": "2026-05-18T22:45:27.628Z",
+  "vendored_paths": [
+    {
+      "src": "design-systems/",
+      "dst": "design-systems/",
+      "kind": "design-system-tree",
+      "recursive": true,
+      "checksum": "sha256:bef62379fc1326a1a918800f64c18d72297360ac2a3cb1c556c61e33e062cb0a"
+    },
+    {
+      "src": "skills/",
+      "dst": "vendor/open-design/skills/",
+      "kind": "skill-bundle-tree",
+      "recursive": true,
+      "checksum": "sha256:6ab73f335f7c4c4a8087382773b3072420320be3cdf6d2bf9c9853229193c849"
+    },
+    {
+      "src": "packages/contracts/src/prompts/system.ts",
+      "dst": "vendor/open-design/prompts/system.ts",
+      "kind": "prompt-source",
+      "checksum": "sha256:f1c160beae647c44534d846af63e795b5a17c1ee1373124a81ba406586a6f1a3"
+    },
+    {
+      "src": "packages/contracts/src/prompts/discovery.ts",
+      "dst": "vendor/open-design/prompts/discovery.ts",
+      "kind": "prompt-source",
+      "checksum": "sha256:55f857da05901a4a476dff29f0843081a2b5f3ae764a27fa621b349744bb5a95"
+    },
+    {
+      "src": "packages/contracts/src/prompts/directions.ts",
+      "dst": "vendor/open-design/prompts/directions.ts",
+      "kind": "prompt-source",
+      "checksum": "sha256:6b0ef0288860c32f98cfa38f1fc1ba1ab3d5d52a9dd80ca3af982942bd85d899"
+    },
+    {
+      "src": "assets/frames/",
+      "dst": "vendor/open-design/frames/",
+      "kind": "frame-asset",
+      "recursive": true,
+      "checksum": "sha256:75306617d9065ecfce2116082c88cde59160a61eb5126dd3f4cfce6be4b7bbe1"
+    },
+    {
+      "src": "templates/deck-framework.html",
+      "dst": "vendor/open-design/templates/deck-framework.html",
+      "kind": "template-asset",
+      "checksum": "sha256:c4a4ed7ae2d885fc9186fa42cc6693d78dc63f427e239b79f3268b1c4f1db039"
+    }
+  ],
+  "license_attribution": [
+    {
+      "path": "LICENSE",
+      "license": "Apache-2.0",
+      "source": "https://github.com/nexu-io/open-design/blob/main/LICENSE"
+    }
+  ],
+  "history": [
+    {
+      "event": "bump",
+      "sha": "454e8373fb2ac3362a3ed20374bd5709d5839c7a",
+      "at": "2026-04-30T15:46:40.116Z",
+      "reason": "PR3 #571 — first pin for design-systems vendor"
+    },
+    {
+      "event": "apply",
+      "sha": "454e8373fb2ac3362a3ed20374bd5709d5839c7a",
+      "at": "2026-04-30T15:49:14.431Z",
+      "reason": "auto-apply"
+    },
+    {
+      "event": "apply",
+      "sha": "454e8373fb2ac3362a3ed20374bd5709d5839c7a",
+      "at": "2026-04-30T15:58:05.403Z",
+      "reason": "auto-apply"
+    },
+    {
+      "event": "apply",
+      "sha": "454e8373fb2ac3362a3ed20374bd5709d5839c7a",
+      "at": "2026-04-30T16:09:07.930Z",
+      "reason": "auto-apply"
+    },
+    {
+      "event": "apply",
+      "sha": "454e8373fb2ac3362a3ed20374bd5709d5839c7a",
+      "at": "2026-04-30T16:12:12.317Z",
+      "reason": "auto-apply"
+    },
+    {
+      "event": "bump",
+      "sha": "d25a7aaf4219d69b6a3055ddda25fbce0dafd24d",
+      "at": "2026-04-30T20:18:32.516Z",
+      "reason": "EPIC #568 close sweep — clear tracker #580 (6 commits / 47 paths churn)"
+    },
+    {
+      "event": "apply",
+      "sha": "d25a7aaf4219d69b6a3055ddda25fbce0dafd24d",
+      "at": "2026-05-14T00:00:00.000Z",
+      "reason": "spec 027 — bootstrap port from anthill at pinned SHA (re-homed into /product skill via spec 049 after MCP discontinued 2026-05-19)"
+    }
+  ]
+}

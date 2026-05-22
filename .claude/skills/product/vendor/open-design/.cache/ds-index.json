@@ -1,0 +1,858 @@
+{
+  "generated_at": "2026-05-14T17:03:39.334Z",
+  "pinned_sha": "d25a7aaf4219d69b6a3055ddda25fbce0dafd24d",
+  "count": 72,
+  "systems": [
+    {
+      "name": "airbnb",
+      "mood": "Travel marketplace. Warm coral accent, photography-driven, rounded UI.",
+      "palette_summary": [
+        "#ff385c",
+        "#222222",
+        "#92174d",
+        "#460479",
+        "#e00b41",
+        "#428bff"
+      ]
+    },
+    {
+      "name": "airtable",
+      "mood": "Spreadsheet-database hybrid. Colorful, friendly, structured data aesthetic.",
+      "palette_summary": [
+        "#181d26",
+        "#1b61c9",
+        "#ffffff",
+        "#006400",
+        "#333333",
+        "#254fad"
+      ]
+    },
+    {
+      "name": "apple",
+      "mood": "Consumer electronics. Premium white space, SF Pro, cinematic imagery.",
+      "palette_summary": [
+        "#000000",
+        "#f5f5f7",
+        "#0071e3",
+        "#0066cc",
+        "#2997ff",
+        "#1d1d1f"
+      ]
+    },
+    {
+      "name": "binance",
+      "mood": "Crypto exchange. Bold yellow accent on monochrome, trading-floor urgency.",
+      "palette_summary": [
+        "#222126",
+        "#f0b90b",
+        "#ffd000",
+        "#f8d12f",
+        "#d0980b",
+        "#1eaedb"
+      ]
+    },
+    {
+      "name": "bmw",
+      "mood": "Luxury automotive. Dark premium surfaces, precise German engineering aesthetic.",
+      "palette_summary": [
+        "#1c69d4",
+        "#0653b6",
+        "#757575",
+        "#ffffff",
+        "#262626",
+        "#bbbbbb"
+      ]
+    },
+    {
+      "name": "bugatti",
+      "mood": "Hypercar brand. Cinema-black canvas, monochrome austerity, monumental display type.",
+      "palette_summary": [
+        "#000000",
+        "#ffffff",
+        "#999999",
+        "#0070cc"
+      ]
+    },
+    {
+      "name": "cal",
+      "mood": "Open-source scheduling. Clean neutral UI, developer-oriented simplicity.",
+      "palette_summary": [
+        "#242424",
+        "#898989",
+        "#111111",
+        "#ffffff",
+        "#0099ff",
+        "#3b82f6"
+      ]
+    },
+    {
+      "name": "claude",
+      "mood": "Anthropic's AI assistant. Warm terracotta accent, clean editorial layout.",
+      "palette_summary": [
+        "#f5f4ed",
+        "#c96442",
+        "#5e5d59",
+        "#87867f",
+        "#4d4c48",
+        "#f0eee6"
+      ]
+    },
+    {
+      "name": "clay",
+      "mood": "Creative agency. Organic shapes, soft gradients, art-directed layout.",
+      "palette_summary": [
+        "#faf9f7",
+        "#dad4c8",
+        "#eee9df",
+        "#000000",
+        "#ffffff",
+        "#84e7a5"
+      ]
+    },
+    {
+      "name": "clickhouse",
+      "mood": "Fast analytics database. Yellow-accented, technical documentation style.",
+      "palette_summary": [
+        "#000000",
+        "#414141",
+        "#faff69",
+        "#166534",
+        "#f4f692",
+        "#14572f"
+      ]
+    },
+    {
+      "name": "cohere",
+      "mood": "Enterprise AI platform. Vibrant gradients, data-rich dashboard aesthetic.",
+      "palette_summary": [
+        "#d9d9dd",
+        "#e5e7eb",
+        "#1863dc",
+        "#000000",
+        "#212121",
+        "#17171c"
+      ]
+    },
+    {
+      "name": "coinbase",
+      "mood": "Crypto exchange. Clean blue identity, trust-focused, institutional feel.",
+      "palette_summary": [
+        "#0052ff",
+        "#578bfa",
+        "#0a0b0d",
+        "#282b31",
+        "#eef0f3",
+        "#ffffff"
+      ]
+    },
+    {
+      "name": "composio",
+      "mood": "Tool integration platform. Modern dark with colorful integration icons.",
+      "palette_summary": [
+        "#0f0f0f",
+        "#0007cd",
+        "#00ffff",
+        "#0089ff",
+        "#0096ff",
+        "#000000"
+      ]
+    },
+    {
+      "name": "cursor",
+      "mood": "AI-first code editor. Sleek dark interface, gradient accents.",
+      "palette_summary": [
+        "#f2f1ed",
+        "#26251e",
+        "#e6e5e0",
+        "#ebeae5",
+        "#cf2d56",
+        "#f54e00"
+      ]
+    },
+    {
+      "name": "default",
+      "mood": "A clean, product-oriented default. Use when the brief doesn't call for a",
+      "palette_summary": [
+        "#fafafa",
+        "#111111",
+        "#2f6feb",
+        "#6b6b6b",
+        "#e5e5e5",
+        "#ffffff"
+      ]
+    },
+    {
+      "name": "elevenlabs",
+      "mood": "AI voice platform. Dark cinematic UI, audio-waveform aesthetics.",
+      "palette_summary": [
+        "#ffffff",
+        "#f5f5f5",
+        "#f5f2ef",
+        "#777169",
+        "#000000",
+        "#4e4e4e"
+      ]
+    },
+    {
+      "name": "expo",
+      "mood": "React Native platform. Dark theme, tight letter-spacing, code-centric.",
+      "palette_summary": [
+        "#f0f0f3",
+        "#000000",
+        "#60646c",
+        "#b0b4ba",
+        "#555860",
+        "#1c2024"
+      ]
+    },
+    {
+      "name": "ferrari",
+      "mood": "Luxury automotive. Chiaroscuro editorial, Ferrari Red accents, cinematic black.",
+      "palette_summary": [
+        "#da291c",
+        "#303030",
+        "#8f8f8f",
+        "#d2d2d2",
+        "#fff200",
+        "#f6e500"
+      ]
+    },
+    {
+      "name": "figma",
+      "mood": "Collaborative design tool. Vibrant multi-color, playful yet professional.",
+      "palette_summary": [
+        "#000000",
+        "#ffffff"
+      ]
+    },
+    {
+      "name": "framer",
+      "mood": "Website builder. Bold black and blue, motion-first, design-forward.",
+      "palette_summary": [
+        "#000000",
+        "#0099ff",
+        "#ffffff",
+        "#a6a6a6",
+        "#090909",
+        "#0000ee"
+      ]
+    },
+    {
+      "name": "hashicorp",
+      "mood": "Infrastructure automation. Enterprise-clean, black and white.",
+      "palette_summary": [
+        "#15181e",
+        "#0d0e12",
+        "#7b42bc",
+        "#ffcf25",
+        "#14c6cb",
+        "#1868f2"
+      ]
+    },
+    {
+      "name": "ibm",
+      "mood": "Enterprise technology. Carbon design system, structured blue palette.",
+      "palette_summary": [
+        "#ffffff",
+        "#161616",
+        "#0f62fe",
+        "#f4f4f4",
+        "#262626",
+        "#393939"
+      ]
+    },
+    {
+      "name": "intercom",
+      "mood": "Customer messaging. Friendly blue palette, conversational UI patterns.",
+      "palette_summary": [
+        "#faf9f6",
+        "#111111",
+        "#ff5600",
+        "#dedbd6",
+        "#ffffff",
+        "#fe4c02"
+      ]
+    },
+    {
+      "name": "kraken",
+      "mood": "Crypto trading. Purple-accented dark UI, data-dense dashboards.",
+      "palette_summary": [
+        "#7132f5",
+        "#5741d8",
+        "#5b1ecf",
+        "#101114",
+        "#149e61",
+        "#686b82"
+      ]
+    },
+    {
+      "name": "lamborghini",
+      "mood": "Supercar brand. True black surfaces, gold accents, dramatic uppercase typography.",
+      "palette_summary": [
+        "#000000",
+        "#ffc000",
+        "#ffffff",
+        "#917300",
+        "#ffce3e",
+        "#29abe2"
+      ]
+    },
+    {
+      "name": "linear-app",
+      "mood": "Project management. Ultra-minimal, precise, purple accent.",
+      "palette_summary": [
+        "#08090a",
+        "#f7f8f8",
+        "#5e6ad2",
+        "#7170ff",
+        "#0f1011",
+        "#191a1b"
+      ]
+    },
+    {
+      "name": "lovable",
+      "mood": "AI full-stack builder. Playful gradients, friendly dev aesthetic.",
+      "palette_summary": [
+        "#f7f4ed",
+        "#1c1c1c",
+        "#eceae4",
+        "#fcfbf8",
+        "#5f5f5d",
+        "#3b82f6"
+      ]
+    },
+    {
+      "name": "mastercard",
+      "mood": "Global payments network. Warm cream canvas, orbital pill shapes, editorial warmth.",
+      "palette_summary": [
+        "#f3f0ee",
+        "#141413",
+        "#eb001b",
+        "#f79e1b",
+        "#cf4500",
+        "#f37338"
+      ]
+    },
+    {
+      "name": "meta",
+      "mood": "Tech retail store. Photography-first, binary light/dark surfaces, Meta Blue CTAs.",
+      "palette_summary": [
+        "#0064e0",
+        "#0143b5",
+        "#004bb9",
+        "#47a5fa",
+        "#1877f2",
+        "#d6311f"
+      ]
+    },
+    {
+      "name": "minimax",
+      "mood": "AI model provider. Bold dark interface with neon accents.",
+      "palette_summary": [
+        "#ffffff",
+        "#1456f0",
+        "#3b82f6",
+        "#60a5fa",
+        "#ea5ec1",
+        "#222222"
+      ]
+    },
+    {
+      "name": "mintlify",
+      "mood": "Documentation platform. Clean, green-accented, reading-optimized.",
+      "palette_summary": [
+        "#ffffff",
+        "#0d0d0d",
+        "#18e299",
+        "#d4fae8",
+        "#0fa76e",
+        "#c37d0d"
+      ]
+    },
+    {
+      "name": "miro",
+      "mood": "Visual collaboration. Bright yellow accent, infinite canvas aesthetic.",
+      "palette_summary": [
+        "#1c1c1e",
+        "#5b76fe",
+        "#00b473",
+        "#ffffff",
+        "#2a41b6",
+        "#ffc6c6"
+      ]
+    },
+    {
+      "name": "mistral-ai",
+      "mood": "Open-weight LLM provider. French-engineered minimalism, purple-toned.",
+      "palette_summary": [
+        "#fa520f",
+        "#ffd900",
+        "#ffa110",
+        "#fffaeb",
+        "#fb6424",
+        "#ff8105"
+      ]
+    },
+    {
+      "name": "mongodb",
+      "mood": "Document database. Green leaf branding, developer documentation focus.",
+      "palette_summary": [
+        "#001e2b",
+        "#00ed64",
+        "#b8c4c2",
+        "#00684a",
+        "#006cfa",
+        "#3860be"
+      ]
+    },
+    {
+      "name": "nike",
+      "mood": "Athletic retail. Monochrome UI, massive uppercase type, full-bleed photography.",
+      "palette_summary": [
+        "#111111",
+        "#000000",
+        "#ffffff",
+        "#fafafa",
+        "#f5f5f5",
+        "#e5e5e5"
+      ]
+    },
+    {
+      "name": "notion",
+      "mood": "All-in-one workspace. Warm minimalism, serif headings, soft surfaces.",
+      "palette_summary": [
+        "#ffffff",
+        "#f6f5f4",
+        "#31302e",
+        "#615d59",
+        "#a39e98",
+        "#0075de"
+      ]
+    },
+    {
+      "name": "nvidia",
+      "mood": "GPU computing. Green-black energy, technical power aesthetic.",
+      "palette_summary": [
+        "#000000",
+        "#ffffff",
+        "#76b900",
+        "#bff230",
+        "#df6500",
+        "#ef9100"
+      ]
+    },
+    {
+      "name": "ollama",
+      "mood": "Run LLMs locally. Terminal-first, monochrome simplicity.",
+      "palette_summary": [
+        "#000000",
+        "#ffffff",
+        "#262626",
+        "#090909",
+        "#fafafa",
+        "#e5e5e5"
+      ]
+    },
+    {
+      "name": "opencode-ai",
+      "mood": "AI coding platform. Developer-centric dark theme.",
+      "palette_summary": [
+        "#201d1d",
+        "#fdfcfc",
+        "#9a9898",
+        "#007aff",
+        "#ff3b30",
+        "#30d158"
+      ]
+    },
+    {
+      "name": "pinterest",
+      "mood": "Visual discovery. Red accent, masonry grid, image-first.",
+      "palette_summary": [
+        "#e60023",
+        "#91918c",
+        "#62625b",
+        "#e5e5e0",
+        "#211922",
+        "#103c25"
+      ]
+    },
+    {
+      "name": "playstation",
+      "mood": "Gaming console retail. Three-surface channel layout, quiet-authority display type, cyan hover-scale.",
+      "palette_summary": [
+        "#1eaedb",
+        "#0070cc",
+        "#d53b00",
+        "#000000",
+        "#ffffff",
+        "#1883fd"
+      ]
+    },
+    {
+      "name": "posthog",
+      "mood": "Product analytics. Playful hedgehog branding, developer-friendly dark UI.",
+      "palette_summary": [
+        "#fdfdf8",
+        "#f54e00",
+        "#1e1f23",
+        "#bfc1b7",
+        "#eeefe9",
+        "#4d4f46"
+      ]
+    },
+    {
+      "name": "raycast",
+      "mood": "Productivity launcher. Sleek dark chrome, vibrant gradient accents.",
+      "palette_summary": [
+        "#07080a",
+        "#ff6363",
+        "#ffffff",
+        "#55b3ff",
+        "#5fc992",
+        "#ffbc33"
+      ]
+    },
+    {
+      "name": "renault",
+      "mood": "French automotive. Vibrant aurora gradients, NouvelR typography, bold energy.",
+      "palette_summary": [
+        "#efdf00",
+        "#1883fd",
+        "#000000",
+        "#ffffff",
+        "#f8eb4c",
+        "#d9d9d6"
+      ]
+    },
+    {
+      "name": "replicate",
+      "mood": "Run ML models via API. Clean white canvas, code-forward.",
+      "palette_summary": [
+        "#ea2804",
+        "#202020",
+        "#2b9a66",
+        "#dd4425",
+        "#24292e",
+        "#ffffff"
+      ]
+    },
+    {
+      "name": "resend",
+      "mood": "Email API. Minimal dark theme, monospace accents.",
+      "palette_summary": [
+        "#000000",
+        "#f0f0f0",
+        "#ffffff",
+        "#ff5900",
+        "#ff801f",
+        "#ffa057"
+      ]
+    },
+    {
+      "name": "revolut",
+      "mood": "Digital banking. Sleek dark interface, gradient cards, fintech precision.",
+      "palette_summary": [
+        "#e23b4a",
+        "#ec7e00",
+        "#00a87e",
+        "#494fdf",
+        "#e61e49",
+        "#191c1f"
+      ]
+    },
+    {
+      "name": "runwayml",
+      "mood": "AI video generation. Cinematic dark UI, media-rich layout.",
+      "palette_summary": [
+        "#767d88",
+        "#7d848e",
+        "#000000",
+        "#030303",
+        "#1a1a1a",
+        "#ffffff"
+      ]
+    },
+    {
+      "name": "sanity",
+      "mood": "Headless CMS. Red accent, content-first editorial layout.",
+      "palette_summary": [
+        "#0b0b0b",
+        "#212121",
+        "#353535",
+        "#797979",
+        "#b9b9b9",
+        "#ededed"
+      ]
+    },
+    {
+      "name": "sentry",
+      "mood": "Error monitoring. Dark dashboard, data-dense, pink-purple accent.",
+      "palette_summary": [
+        "#1f1633",
+        "#150f23",
+        "#c2ef4e",
+        "#79628c",
+        "#362d59",
+        "#6a5fc1"
+      ]
+    },
+    {
+      "name": "shopify",
+      "mood": "E-commerce platform. Dark-first cinematic, neon green accent, ultra-light type.",
+      "palette_summary": [
+        "#02090a",
+        "#061a1c",
+        "#102620",
+        "#36f4a4",
+        "#c1fbd4",
+        "#d4f9e0"
+      ]
+    },
+    {
+      "name": "spacex",
+      "mood": "Space technology. Stark black and white, full-bleed imagery, futuristic.",
+      "palette_summary": [
+        "#000000",
+        "#f0f0fa"
+      ]
+    },
+    {
+      "name": "spotify",
+      "mood": "Music streaming. Vibrant green on dark, bold type, album-art-driven.",
+      "palette_summary": [
+        "#121212",
+        "#181818",
+        "#1f1f1f",
+        "#1ed760",
+        "#f3727f",
+        "#ffa42b"
+      ]
+    },
+    {
+      "name": "starbucks",
+      "mood": "Global coffee retail brand. Four-tier green system, warm cream canvas, full-pill buttons.",
+      "palette_summary": [
+        "#f2f0eb",
+        "#edebe9",
+        "#006241",
+        "#cba258",
+        "#00754a",
+        "#1e3932"
+      ]
+    },
+    {
+      "name": "stripe",
+      "mood": "Payment infrastructure. Signature purple gradients, weight-300 elegance.",
+      "palette_summary": [
+        "#ffffff",
+        "#061b31",
+        "#533afd",
+        "#ea2261",
+        "#f96bee",
+        "#1c1e54"
+      ]
+    },
+    {
+      "name": "supabase",
+      "mood": "Open-source Firebase alternative. Dark emerald theme, code-first.",
+      "palette_summary": [
+        "#0f0f0f",
+        "#171717",
+        "#3ecf8e",
+        "#00c573",
+        "#898989",
+        "#fafafa"
+      ]
+    },
+    {
+      "name": "superhuman",
+      "mood": "Fast email client. Premium dark UI, keyboard-first, purple glow.",
+      "palette_summary": [
+        "#1b1938",
+        "#e9e5dd",
+        "#cbb7fb",
+        "#292827",
+        "#714cb6",
+        "#ffffff"
+      ]
+    },
+    {
+      "name": "tesla",
+      "mood": "Electric automotive. Radical subtraction, full-viewport photography, near-zero UI.",
+      "palette_summary": [
+        "#3e6ae1",
+        "#ffffff",
+        "#f4f4f4",
+        "#171a20",
+        "#393c41",
+        "#5c5e62"
+      ]
+    },
+    {
+      "name": "theverge",
+      "mood": "Tech editorial media. Acid-mint and ultraviolet accents, Manuka display, rave-flyer story tiles.",
+      "palette_summary": [
+        "#131313",
+        "#3cffd0",
+        "#5200ff",
+        "#ffffff",
+        "#2d2d2d",
+        "#309875"
+      ]
+    },
+    {
+      "name": "together-ai",
+      "mood": "Open-source AI infrastructure. Technical, blueprint-style design.",
+      "palette_summary": [
+        "#010120",
+        "#ef2cc1",
+        "#fc4c02",
+        "#bdbbff",
+        "#ffffff",
+        "#000000"
+      ]
+    },
+    {
+      "name": "uber",
+      "mood": "Mobility platform. Bold black and white, tight type, urban energy.",
+      "palette_summary": [
+        "#000000",
+        "#ffffff",
+        "#e2e2e2",
+        "#f3f3f3",
+        "#efefef",
+        "#4b4b4b"
+      ]
+    },
+    {
+      "name": "vercel",
+      "mood": "Frontend deployment. Black and white precision, Geist font.",
+      "palette_summary": [
+        "#ffffff",
+        "#171717",
+        "#ff5b4f",
+        "#de1d8d",
+        "#0a72ef",
+        "#000000"
+      ]
+    },
+    {
+      "name": "vodafone",
+      "mood": "Global telecom brand. Monumental uppercase display, Vodafone Red chapter bands.",
+      "palette_summary": [
+        "#e60000",
+        "#25282b",
+        "#ffffff",
+        "#3860be",
+        "#ac1811",
+        "#f2f2f2"
+      ]
+    },
+    {
+      "name": "voltagent",
+      "mood": "AI agent framework. Void-black canvas, emerald accent, terminal-native.",
+      "palette_summary": [
+        "#050507",
+        "#00d992",
+        "#3d3a39",
+        "#8b949e",
+        "#b8b3b0",
+        "#2fd6a1"
+      ]
+    },
+    {
+      "name": "warm-editorial",
+      "mood": "A serif-led magazine aesthetic. Terracotta accent on warm off-white paper —",
+      "palette_summary": [
+        "#faf7f2",
+        "#1c1a17",
+        "#c0512f",
+        "#2f5b4f",
+        "#8a817a",
+        "#ffffff"
+      ]
+    },
+    {
+      "name": "warp",
+      "mood": "Modern terminal. Dark IDE-like interface, block-based command UI.",
+      "palette_summary": [
+        "#faf9f6",
+        "#353534",
+        "#868584",
+        "#afaeac",
+        "#666469",
+        "#454545"
+      ]
+    },
+    {
+      "name": "webflow",
+      "mood": "Visual web builder. Blue-accented, polished marketing site aesthetic.",
+      "palette_summary": [
+        "#146ef5",
+        "#080808",
+        "#7a3dff",
+        "#ed52cb",
+        "#00d722",
+        "#ff6b00"
+      ]
+    },
+    {
+      "name": "wired",
+      "mood": "Tech magazine. Paper-white broadsheet density, custom serif display, mono kickers, ink-blue links.",
+      "palette_summary": [
+        "#057dbc",
+        "#000000",
+        "#1a1a1a",
+        "#ffffff",
+        "#e2e8f0",
+        "#757575"
+      ]
+    },
+    {
+      "name": "wise",
+      "mood": "Money transfer. Bright green accent, friendly and clear.",
+      "palette_summary": [
+        "#0e0f0c",
+        "#9fe870",
+        "#163300",
+        "#e2f6d5",
+        "#cdffad",
+        "#054d28"
+      ]
+    },
+    {
+      "name": "x-ai",
+      "mood": "Elon Musk's AI lab. Stark monochrome, futuristic minimalism.",
+      "palette_summary": [
+        "#1f2228",
+        "#ffffff",
+        "#000000"
+      ]
+    },
+    {
+      "name": "xiaohongshu",
+      "mood": "Lifestyle UGC social platform. Singular brand red, generous radius, content-first.",
+      "palette_summary": [
+        "#ffffff",
+        "#f5f5f5",
+        "#ff2442",
+        "#ff2e4d",
+        "#fdbc5f",
+        "#fafafa"
+      ]
+    },
+    {
+      "name": "zapier",
+      "mood": "Automation platform. Warm orange, friendly illustration-driven.",
+      "palette_summary": [
+        "#fffefb",
+        "#201515",
+        "#ff4f00",
+        "#c5c0b1",
+        "#939084",
+        "#eceae3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+#!/usr/bin/env bash
+# .githooks/pre-commit
+# Native git pre-commit hook — secrets-scan capacity.
+#
+# This hook runs in git commit's own process, AFTER staging is finalised, so
+# `gitleaks git --pre-commit --staged` always sees the real index — even when
+# the user ran a compound `git add ... && git commit ...` invocation. That
+# timing correction is the primary fix for the original staging-timing bug.
+#
+# Companion / dependency:
+#   The override-marker grammar (`# OVERRIDE: <reason ≥10 chars>`) lives in the
+#   preflight layer (.claude/hooks/secrets-scan.sh, PreToolUse(Bash)). When a
+#   valid override is parsed there, the preflight hook rewrites the Bash command
+#   to prepend CLAUDE_SECRETS_OVERRIDE_REASON='<reason>', which git inherits as
+#   an environment variable and this hook reads at line ~80. WITHOUT the
+#   preflight hook in place, no override env var is ever set and this hook will
+#   block normally on any finding. Deleting or bypassing the preflight layer
+#   silently disables override support — not the secrets scan itself.
+#
+# Reference:
+#   .claude/rules/secrets-scan.md   — full discipline, both layers
+#
+# Lazarus vector note:
+#   This script is activated via `git config core.hooksPath .githooks` (a
+#   one-time manual step per fork). Do NOT auto-install this via a post-checkout
+#   or post-clone hook — that is the exact mechanism used by the 2025 Lazarus
+#   Group "Contagious Interview" campaign to deliver malware via poisoned repos.
+#   The manual install step is intentional and documented in README.md.
+#
+# Escape hatches:
+#   CLAUDE_SKIP_SECRETS_SCAN=1        — exit 0 silently, no audit line
+#   CLAUDE_SECRETS_OVERRIDE_REASON=<reason>  — injected by preflight on override
+#
+# Exit codes (native git hook convention):
+#   0 = allow the commit to proceed
+#   1 = block the commit (git honours non-zero exit from pre-commit hooks)
+#   NOTE: exit 1 here, NOT exit 2. Exit 2 is the Claude Code PreToolUse
+#   convention and is NOT the right signal for native git hooks.
+#
+# bash 3.2-compatible: no associative arrays, no mapfile, no `[[ =~ ]]`.
+# set -uo pipefail (NOT set -euo pipefail): `-e` interferes with intentional
+# non-zero exit-code capture from gitleaks (returns 1 on findings, 0 on clean).
+
+set -uo pipefail
+
+# ---------------------------------------------------------------------------
+# Phase 1: User-facing escape hatch
+# ---------------------------------------------------------------------------
+# When CLAUDE_SKIP_SECRETS_SCAN=1, exit 0 silently — no scan, no audit line.
+# Matches the preflight layer behaviour exactly.
+if [ "${CLAUDE_SKIP_SECRETS_SCAN:-0}" = "1" ]; then
+  exit 0
+fi
+
+# ---------------------------------------------------------------------------
+# Resolve project root + audit-log path
+# ---------------------------------------------------------------------------
+# PROJECT_DIR is derived from the git repo root at runtime. Do NOT use
+# $CLAUDE_PROJECT_DIR — that env var is only set by the Claude Code hook
+# runner, not by native git commit processes.
+PROJECT_DIR="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+if [ -z "$PROJECT_DIR" ]; then
+  # Not inside a git tree — nothing to do, allow the commit.
+  exit 0
+fi
+
+AUDIT_LOG="$PROJECT_DIR/.claude/secrets-audit.jsonl"
+
+# Ensure the audit-log parent directory exists before any append attempt.
+mkdir -p "$(dirname "$AUDIT_LOG")" 2>/dev/null || true
+
+ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+# ---------------------------------------------------------------------------
+# Audit helper
+# ---------------------------------------------------------------------------
+# append_audit decision finding_count override_reason staged_count
+# Decision values emitted by this hook:
+#   allow              — scan ran clean, finding_count==0
+#   allow-empty        — no staged files (e.g. `git commit --allow-empty`)
+#   allow-parse-error  — gitleaks JSON unparseable, fail open with forensic
+#                        signal preserved (distinct from "allow" on purpose)
+#   block              — findings present, no override env var, exit 1
+#   override           — findings present, CLAUDE_SECRETS_OVERRIDE_REASON set
+#   skip-no-engine     — gitleaks missing from PATH, fail open
+# All fields are written; session_id and agent_id are hardcoded null because
+# native git hooks have no access to Claude Code's payload.
+append_audit() {
+  local decision="$1"
+  local finding_count="$2"
+  local reason="$3"
+  local staged_files_count="$4"
+
+  local reason_json
+  if [ -n "$reason" ]; then
+    # jq -R -s encodes as a JSON string; rtrimstr strips any trailing newline.
+    reason_json="$(printf '%s' "$reason" | jq -R -s -c 'rtrimstr("\n")')"
+  else
+    reason_json="null"
+  fi
+
+  local line
+  line="$(jq -c -n \
+    --arg ts "$ts" \
+    --arg decision "$decision" \
+    --argjson finding_count "$finding_count" \
+    --argjson override_reason "$reason_json" \
+    --arg scan_mode "native-pre-commit" \
+    --argjson staged_files_count "$staged_files_count" \
+    '{ts:$ts, session_id:null, agent_id:null, decision:$decision, finding_count:$finding_count, override_reason:$override_reason, scan_mode:$scan_mode, staged_files_count:$staged_files_count}')"
+
+  # Atomic append via flock when available; fall back to plain append otherwise.
+  # Probe writability in a subshell BEFORE the bare `exec 9>...` redirect —
+  # `exec 9>file 2>/dev/null` would permanently silence FD 2 for the rest of
+  # the script, eating every block message. See .claude/rules/delegation.md
+  # § Gotchas (the sticky exec redirect trap).
+  if command -v flock >/dev/null 2>&1; then
+    local lock_path="$AUDIT_LOG.lock"
+    ( : >>"$lock_path" ) 2>/dev/null || {
+      printf '%s\n' "$line" >> "$AUDIT_LOG" 2>/dev/null || true
+      return 0
+    }
+    exec 9>"$lock_path"
+    flock 9
+    printf '%s\n' "$line" >> "$AUDIT_LOG"
+    flock -u 9
+    exec 9>&-
+  else
+    printf '%s\n' "$line" >> "$AUDIT_LOG" 2>/dev/null || true
+  fi
+}
+
+# ---------------------------------------------------------------------------
+# jq availability check
+# ---------------------------------------------------------------------------
+# jq is required for both audit-log append and JSON parse. Fail open when
+# missing — same posture as the preflight hook and delegation validator.
+if ! command -v jq >/dev/null 2>&1; then
+  printf '%s\n' "secrets-scan: jq not found, scan skipped" >&2
+  exit 0
+fi
+
+# ---------------------------------------------------------------------------
+# Phase 2: Staged-file count
+# ---------------------------------------------------------------------------
+# Count staged files via git diff --cached --name-only. Empty output means an
+# allow-empty commit (e.g. `git commit --allow-empty`); record that separately
+# so the audit log can distinguish "nothing to scan" from "scanned, found
+# nothing" — the original silent-failure mode produced the latter shape for
+# compound commands that staged nothing before the commit; this shape makes
+# that unreproducible.
+staged_files_count="$(git diff --cached --name-only 2>/dev/null | wc -l | tr -d ' ')"
+# Ensure it's a plain integer (wc output can have leading spaces on some BSD
+# platforms; tr -d ' ' handles that — but also guard against non-numeric).
+if ! printf '%s' "$staged_files_count" | grep -qE '^[0-9]+$'; then
+  staged_files_count=0
+fi
+
+if [ "$staged_files_count" -eq 0 ]; then
+  append_audit "allow-empty" 0 "" 0
+  exit 0
+fi
+
+# ---------------------------------------------------------------------------
+# Phase 3: Gitleaks availability check
+# ---------------------------------------------------------------------------
+if ! command -v gitleaks >/dev/null 2>&1; then
+  printf '%s\n' "secrets-scan: gitleaks not found, scan skipped" >&2
+  append_audit "skip-no-engine" 0 "" "$staged_files_count"
+  exit 0
+fi
+
+# ---------------------------------------------------------------------------
+# Phase 4: Gitleaks scan
+# ---------------------------------------------------------------------------
+# Use the current invocation shape: `gitleaks git --pre-commit --staged`
+# (the deprecated `gitleaks protect --staged` is NOT used here).
+# Run from repo root so relative file paths in the report are repo-relative.
+GITLEAKS_REPORT="$(mktemp -t gitleaks-XXXXXX.json 2>/dev/null || mktemp)"
+GITLEAKS_OUT="$(mktemp -t gitleaks-out-XXXXXX 2>/dev/null || mktemp)"
+
+# Capture exit code; do NOT let `pipefail` or `set -e` abort on gitleaks
+# returning 1 (its signal for "findings present").
+set +e
+( cd "$PROJECT_DIR" && gitleaks git --pre-commit --staged --no-banner \
+    --report-format=json --report-path="$GITLEAKS_REPORT" ) >"$GITLEAKS_OUT" 2>&1
+gitleaks_exit=$?
+set -e
+
+# ---------------------------------------------------------------------------
+# Defensive JSON parse
+# ---------------------------------------------------------------------------
+# gitleaks v8 writes a JSON array of findings to the report path.
+# Use `if type == "array" then length else -1 end` — NOT `// empty` — so that
+# a literal `false` or a missing field does not silently collapse to 0.
+# See .claude/rules/delegation.md § Gotchas for the `// empty` collapse trap.
+finding_count=0
+if [ -s "$GITLEAKS_REPORT" ]; then
+  finding_count="$(jq 'if type == "array" then length else -1 end' "$GITLEAKS_REPORT" 2>/dev/null || printf '%s' '-1')"
+fi
+
+if [ "$finding_count" = "-1" ] || ! printf '%s' "$finding_count" | grep -qE '^[0-9]+$'; then
+  # Parse failure: surface raw output, fail open.
+  cat >&2 <<EOF
+secrets-scan: failed to parse gitleaks JSON output (exit=$gitleaks_exit).
+Raw gitleaks output:
+$(cat "$GITLEAKS_OUT" 2>/dev/null || true)
+EOF
+  rm -f "$GITLEAKS_REPORT" "$GITLEAKS_OUT" 2>/dev/null || true
+  # Distinct decision value (not "allow") so post-hoc audit analysis can
+  # separate "scan ran clean" from "scan output unparseable" — both fail open
+  # to keep commits flowing, but the forensic signal is preserved.
+  append_audit "allow-parse-error" 0 "" "$staged_files_count"
+  exit 0
+fi
+
+# ---------------------------------------------------------------------------
+# Phase 5: Decision
+# ---------------------------------------------------------------------------
+
+if [ "$finding_count" -eq 0 ]; then
+  rm -f "$GITLEAKS_REPORT" "$GITLEAKS_OUT" 2>/dev/null || true
+  append_audit "allow" 0 "" "$staged_files_count"
+  exit 0
+fi
+
+# Findings present — check for override env var (injected by preflight hook).
+override_reason="${CLAUDE_SECRETS_OVERRIDE_REASON:-}"
+if [ -n "$override_reason" ]; then
+  rm -f "$GITLEAKS_REPORT" "$GITLEAKS_OUT" 2>/dev/null || true
+  append_audit "override" "$finding_count" "$override_reason" "$staged_files_count"
+  exit 0
+fi
+
+# Block path: print each finding's Description (fallback RuleID, then "secret")
+# plus File:StartLine on stderr, then exit 1 (native git pre-commit convention).
+findings_summary="$(jq -r '.[] | "  - \(.Description // .RuleID // "secret") at \(.File // "<unknown>"):\(.StartLine // 0)"' "$GITLEAKS_REPORT" 2>/dev/null || true)"
+
+cat >&2 <<EOF
+secrets-scan: blocked — $finding_count finding(s) detected in staged diff.
+
+$findings_summary
+
+To bypass for a legitimate fixture or test vector, use one of:
+  1. Add an inline comment on the same line as the secret:
+       <your secret line>  # gitleaks:allow
+  2. Add a path/regex exemption to .gitleaks.toml.
+  3. Prepend an override env var (via the preflight hook's # OVERRIDE: marker):
+       git commit -m "..." # OVERRIDE: <reason ≥10 chars explaining why>
+     (The preflight hook parses the marker and injects CLAUDE_SECRETS_OVERRIDE_REASON.)
+
+See .claude/rules/secrets-scan.md for the full discipline.
+EOF
+
+rm -f "$GITLEAKS_REPORT" "$GITLEAKS_OUT" 2>/dev/null || true
+append_audit "block" "$finding_count" "" "$staged_files_count"
+exit 1

@@ -1,0 +1,471 @@
+{
+  "generated_from": "open-design@454e8373fb2ac3362a3ed20374bd5709d5839c7a",
+  "skill_count": 31,
+  "skills": [
+    {
+      "name": "blog-post",
+      "skill_name": "blog-post",
+      "description": "A long-form article / blog post \u2014 masthead, hero image placeholder, article body with figures and pull quotes, author byline, related posts. Use when the brief asks for \"blog\", \"article\", \"post\", \"ess",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "marketing",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "critique",
+      "skill_name": "critique",
+      "description": "Run a 5-dimension expert design review on any HTML artifact in the project \u2014 Philosophy / Visual hierarchy / Detail / Functionality / Innovation, each scored 0\u201310. Outputs a single self-contained HTML",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "design",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": false
+      }
+    },
+    {
+      "name": "dashboard",
+      "skill_name": "dashboard",
+      "description": "Admin / analytics dashboard in a single HTML file. Fixed left sidebar, top bar with user/search, main grid of KPI cards and one or two charts. Use when the brief asks for a \"dashboard\", \"admin\", \"anal",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "operations",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "dating-web",
+      "skill_name": "dating-web",
+      "description": "A consumer-feeling dating / matchmaking dashboard \u2014 left rail navigation, ticker bar of community signals, headline KPIs, a 30-day mutual-matches bar chart, and a match-rate trend block. Editorial typ",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "personal",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "digital-eguide",
+      "skill_name": "digital-eguide",
+      "description": "A two-spread digital e-guide preview \u2014 page 1 is a cover (display title, author, \"What's inside\" stats, table of contents teaser); page 2 is a spread (lesson body with pull-quote and a step list). Lif",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "marketing",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "docs-page",
+      "skill_name": "docs-page",
+      "description": "A documentation page \u2014 left nav, scrollable article body, right-rail table of contents. Use when the brief mentions \"docs\", \"documentation\", \"guide\", \"API reference\", or \"tutorial\".",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "engineering",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "email-marketing",
+      "skill_name": "email-marketing",
+      "description": "A brand product-launch email \u2014 masthead with wordmark, hero image block, headline lockup with skewed-italic accent, body copy, primary CTA, and a specifications grid. Pure HTML email layout (centered ",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "marketing",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "eng-runbook",
+      "skill_name": "eng-runbook",
+      "description": "An engineering runbook \u2014 service overview, alerts table, dashboards links, common procedures with copy-pasteable commands, on-call rotation, and an incident-response checklist. Use when the brief ment",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "engineering",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "finance-report",
+      "skill_name": "finance-report",
+      "description": "Quarterly / monthly financial report \u2014 masthead with KPIs, revenue and burn charts, P&L summary table, top-line highlights, and an outlook paragraph. Use when the brief mentions \"financial report\", \"Q",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "finance",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "gamified-app",
+      "skill_name": "gamified-app",
+      "description": "A multi-frame gamified mobile-app prototype \u2014 three phone frames on a dark showcase stage. Frame 1: cover / poster, Frame 2: today's quests with XP ribbons and a level bar, Frame 3: quest detail. Vivi",
+      "mode": "prototype",
+      "platform": "mobile",
+      "scenario": "personal",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "guizang-ppt",
+      "skill_name": "magazine-web-ppt",
+      "description": "\u751f\u6210\"\u7535\u5b50\u6742\u5fd7 \u00d7 \u7535\u5b50\u58a8\u6c34\"\u98ce\u683c\u7684\u6a2a\u5411\u7ffb\u9875\u7f51\u9875 PPT\uff08\u5355 HTML \u6587\u4ef6\uff09\uff0c\u542b WebGL \u6d41\u4f53\u80cc\u666f\u3001\u886c\u7ebf\u6807\u9898 + \u975e\u886c\u7ebf\u6b63\u6587\u3001\u7ae0\u8282\u5e55\u5c01\u3001\u6570\u636e\u5927\u5b57\u62a5\u3001\u56fe\u7247\u7f51\u683c\u7b49\u6a21\u677f\u3002\u5f53\u7528\u6237\u9700\u8981\u5236\u4f5c\u5206\u4eab / \u6f14\u8bb2 / \u53d1\u5e03\u4f1a\u98ce\u683c\u7684\u7f51\u9875 PPT\uff0c\u6216\u63d0\u5230\"\u6742\u5fd7\u98ce PPT\"\u3001\"horizontal swipe deck\"\u3001\"editorial magazine\"\u3001\"e-ink presentation\"\u65f6\u4f7f\u7528\u3002",
+      "mode": "deck",
+      "platform": null,
+      "scenario": "marketing",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": false
+      }
+    },
+    {
+      "name": "hr-onboarding",
+      "skill_name": "hr-onboarding",
+      "description": "A new-hire onboarding plan as a single page \u2014 first week schedule, buddy + manager intro, learning track, equipment checklist, and \"you're set when\u2026\" outcomes. Use when the brief mentions \"onboarding\"",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "hr",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "invoice",
+      "skill_name": "invoice",
+      "description": "A printable invoice page \u2014 sender + recipient block, line items table, tax breakdown, totals, and payment instructions. Use when the brief mentions \"invoice\", \"bill\", \"billing statement\", or \"\u53d1\u7968\".",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "finance",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "kanban-board",
+      "skill_name": "kanban-board",
+      "description": "Kanban / task board with columns (To do / In progress / In review / Done), draggable-looking cards, assignee avatars, swimlanes, and a top filter bar. Use when the brief mentions \"kanban\", \"task board",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "operations",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "magazine-poster",
+      "skill_name": "magazine-poster",
+      "description": "An editorial-style poster \u2014 newsprint paper, dateline, oversized serif headline with a struck-through word and italic accent, a 2-column body block, and 6 numbered sections with annotated pull-quote c",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "marketing",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "meeting-notes",
+      "skill_name": "meeting-notes",
+      "description": "Meeting notes page \u2014 title bar with attendees, agenda checklist, decisions block, action items table with owners + dates, and a \"next meeting\" footer. Use when the brief mentions \"meeting notes\", \"min",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "operations",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "mobile-app",
+      "skill_name": "mobile-app",
+      "description": "A mobile-app screen rendered inside a pixel-accurate iPhone 15 Pro frame on the page. Built by copying the seed `assets/template.html` and pasting one screen archetype from `references/layouts.md`. Us",
+      "mode": "prototype",
+      "platform": "mobile",
+      "scenario": "design",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "mobile-onboarding",
+      "skill_name": "mobile-onboarding",
+      "description": "A multi-screen mobile onboarding flow rendered as three phone frames side by side \u2014 splash, value-prop, sign-in. Status bar, swipe dots, primary CTA. Use when the brief mentions \"mobile onboarding\", \"",
+      "mode": "prototype",
+      "platform": "mobile",
+      "scenario": "design",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "motion-frames",
+      "skill_name": "motion-frames",
+      "description": "A single-frame motion-design composition with looping CSS animations \u2014 rotating type ring, animated globe, ticking timer, parallax labels. Renders as a hero video poster you can hand straight to Hyper",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "marketing",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "pm-spec",
+      "skill_name": "pm-spec",
+      "description": "Product spec / PRD as a single page \u2014 problem, success metrics, scope, user stories, design notes, rollout plan, open questions. Use when the brief mentions \"PRD\", \"spec\", \"product spec\", \"feature bri",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "product",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "pricing-page",
+      "skill_name": "pricing-page",
+      "description": "A standalone pricing page \u2014 header, plan tiers, feature comparison table, and an FAQ. Use when the brief asks for \"pricing\", \"plans\", \"subscription tiers\", or a \"compare plans\" page.",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "sales",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "replit-deck",
+      "skill_name": "replit-deck",
+      "description": "Single-file horizontal-swipe HTML deck in the style of Replit Slides's landing-page template gallery. Eight distinct themes (helix, holm, vance, bevel, world-dark, world-mint, atlas, bluehouse) \u2014 each",
+      "mode": "deck",
+      "platform": null,
+      "scenario": "product",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": false
+      }
+    },
+    {
+      "name": "saas-landing",
+      "skill_name": "saas-landing",
+      "description": "Single-page SaaS landing with hero, features, social proof, pricing, and CTA. Respects the active DESIGN.md color/typography/layout tokens. Trigger keywords: \"saas landing\", \"marketing page\", \"product",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "marketing",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "simple-deck",
+      "skill_name": "simple-deck",
+      "description": "Single-file horizontal-swipe HTML deck. Built by copying the seed `assets/template.html` (which carries the proven 5-rule iframe nav script) and pasting slide layouts from `references/layouts.md`. Pit",
+      "mode": "deck",
+      "platform": null,
+      "scenario": "product",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "social-carousel",
+      "skill_name": "social-carousel",
+      "description": "A three-card social-media carousel laid out as 1080\u00d71080 squares \u2014 three cinematic, on-brand panels with display headlines that connect across the series (\"onwards.\" \u2192 \"to the next one.\" \u2192 \"looking ah",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "marketing",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "sprite-animation",
+      "skill_name": "sprite-animation",
+      "description": "A pixel / sprite-style animated explainer slide \u2014 full-bleed cream stage, bold display year, animated pixel-art mascot (e.g. Hanafuda card, mushroom, or 8-bit console), kinetic Japanese display type, ",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "marketing",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "team-okrs",
+      "skill_name": "team-okrs",
+      "description": "OKR tracker page \u2014 quarter banner, three objectives with their key results as progress bars, owner avatars, status pills, and a \"this quarter at a glance\" sidebar. Use when the brief mentions \"OKRs\", ",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "product",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "tweaks",
+      "skill_name": "tweaks",
+      "description": "Wrap any HTML artifact with a side panel of live, parameterized controls \u2014 accent color, type scale, density, motion, theme \u2014 that rewrite CSS custom properties in real time and persist to localStorag",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "design",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": false
+      }
+    },
+    {
+      "name": "web-prototype",
+      "skill_name": "web-prototype",
+      "description": "General-purpose desktop web prototype. Single self-contained HTML file built by copying the seed `assets/template.html` and pasting section layouts from `references/layouts.md`. Default for any landin",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "design",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "weekly-update",
+      "skill_name": "weekly-update",
+      "description": "Single-file horizontal-swipe slide deck for a weekly team update \u2014 shipped, in flight, blocked, metrics, asks. 6\u20138 slides. Use when the brief mentions \"weekly update\", \"team update slides\", \"weekly st",
+      "mode": "deck",
+      "platform": null,
+      "scenario": "operations",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": true
+      }
+    },
+    {
+      "name": "wireframe-sketch",
+      "skill_name": "wireframe-sketch",
+      "description": "A hand-drawn wireframe exploration \u2014 graph-paper background, marker / pencil tone, multiple tab labels for variants, sticky-note annotations, scribbled chart placeholders, hatched fills. Reads like a ",
+      "mode": "prototype",
+      "platform": "desktop",
+      "scenario": "design",
+      "preview": {
+        "type": "html",
+        "entry": "index.html"
+      },
+      "design_system": {
+        "requires": false
+      }
+    }
+  ]
+}

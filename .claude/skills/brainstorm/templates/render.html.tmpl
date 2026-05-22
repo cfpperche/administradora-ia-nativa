@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TOPIC}} — brainstorm</title>
+<style>
+  :root {
+    --bg: #fafafa;
+    --panel: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --accent: #2563eb;
+    --easy-bg: #d1f0de;     --easy-fg: #14532d;
+    --risky-bg: #fef3c7;    --risky-fg: #78350f;
+    --wild-bg: #ede9fe;     --wild-fg: #4c1d95;
+    --unknown-bg: #f3f4f6;  --unknown-fg: #374151;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.5; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 24px 32px 64px; }
+  header { padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  .meta { color: var(--muted); font-size: 13px; }
+  .counts { margin-top: 6px; font-size: 13px; color: var(--muted); }
+  .counts strong { color: var(--ink); }
+  nav.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 20px; flex-wrap: wrap; }
+  nav.tabs button { background: none; border: none; padding: 10px 16px; font-size: 14px; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; font-weight: 500; }
+  nav.tabs button:hover { color: var(--ink); }
+  nav.tabs button.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  section { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  section h2 { font-size: 16px; margin: 0 0 12px; color: var(--ink); }
+  .mindmap-host { width: 100%; height: 520px; border: 1px solid var(--line); border-radius: 6px; background: #fff; overflow: hidden; position: relative; }
+  .mindmap-svg { display: block; width: 100%; height: 100%; cursor: grab; }
+  .mindmap-svg:active { cursor: grabbing; }
+  .mindmap-toolbar { position: absolute; top: 8px; right: 8px; display: flex; gap: 4px; z-index: 2; }
+  .mindmap-toolbar button { background: rgba(255,255,255,0.9); border: 1px solid var(--line); border-radius: 4px; padding: 4px 10px; font-size: 12px; cursor: pointer; color: var(--ink); }
+  .mindmap-toolbar button:hover { background: #fff; border-color: var(--accent); color: var(--accent); }
+  .mindmap-hint { position: absolute; bottom: 8px; left: 8px; font-size: 11px; color: var(--muted); background: rgba(255,255,255,0.85); padding: 2px 8px; border-radius: 3px; pointer-events: none; }
+  .kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .kanban { grid-template-columns: repeat(2, 1fr); } }
+  .col { background: #fafafa; border-radius: 6px; padding: 12px; min-height: 80px; }
+  .col h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 10px; color: var(--muted); }
+  .col[data-tag="easy"] h3 { color: var(--easy-fg); }
+  .col[data-tag="risky"] h3 { color: var(--risky-fg); }
+  .col[data-tag="wild"] h3 { color: var(--wild-fg); }
+  .col[data-tag="unknown"] h3 { color: var(--unknown-fg); }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 5px; padding: 10px 12px; margin-bottom: 8px; font-size: 14px; }
+  .card .src { font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .col[data-tag="easy"] .card { border-left: 3px solid var(--easy-fg); }
+  .col[data-tag="risky"] .card { border-left: 3px solid var(--risky-fg); }
+  .col[data-tag="wild"] .card { border-left: 3px solid var(--wild-fg); }
+  .col[data-tag="unknown"] .card { border-left: 3px solid var(--unknown-fg); }
+  ul.qs { list-style: none; padding: 0; margin: 0; }
+  ul.qs li { padding: 8px 12px; margin-bottom: 6px; background: #fff; border-left: 3px solid var(--accent); border-radius: 4px; font-size: 14px; }
+  blockquote { margin: 0 0 8px; padding: 8px 14px; background: #fff; border-left: 3px solid var(--muted); border-radius: 4px; font-size: 14px; font-style: italic; color: #374151; }
+  blockquote .src { font-style: normal; font-size: 11px; color: var(--muted); margin-top: 4px; display: block; }
+  .lens-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; margin-left: 8px; }
+  .lens-badge.scamper { background: #dbeafe; color: #1e3a8a; }
+  .lens-badge.six-hats { background: linear-gradient(90deg, #f3f4f6, #fee2e2, #fef3c7, #d1fae5, #dbeafe, #f3e8ff); color: #1f2937; }
+  .lens-badge.reverse { background: #fed7aa; color: #7c2d12; }
+  .lens-badge.crazy-8s { background: #fce7f3; color: #831843; }
+  .lens-section { margin-bottom: 18px; }
+  .lens-section h3 { font-size: 13px; margin: 0 0 8px; color: var(--ink); text-transform: uppercase; letter-spacing: 0.04em; }
+  .mermaid { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 16px; overflow-x: auto; }
+  footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
+  .export-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  button.copy-btn { background: var(--accent); color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; }
+  button.copy-btn:hover { background: #1d4ed8; }
+  button.copy-btn.copied { background: var(--easy-fg); }
+  button.copy-btn.fallback { background: var(--muted); }
+  .export-hint { font-size: 12px; color: var(--muted); }
+  textarea.md-fallback { display: none; width: 100%; min-height: 200px; padding: 12px; border: 1px solid var(--line); border-radius: 6px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; background: #fff; }
+  textarea.md-fallback.show { display: block; }
+  .empty { color: var(--muted); font-style: italic; font-size: 13px; padding: 8px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>{{TOPIC}}</h1>
+    <div class="meta">brainstorm session — {{TIMESTAMP}}</div>
+    <div class="counts"><strong>{{IDEAS_COUNT}}</strong> ideas | <strong>{{QUESTIONS_COUNT}}</strong> open questions | <strong>{{LENSES_COUNT}}</strong> lenses applied</div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="exploration" class="active">Exploration</button>
+    {{LENS_TABS_HTML}}
+    <button data-tab="timeline">Timeline</button>
+  </nav>
+
+  <div class="panel active" data-panel="exploration">
+    <section>
+      <h2>Mindmap</h2>
+      <div class="mindmap-host">
+        <div class="mindmap-toolbar">
+          <button type="button" data-mm-action="fit" title="Reset zoom and centre">Fit</button>
+          <button type="button" data-mm-action="zoom-in" title="Zoom in">+</button>
+          <button type="button" data-mm-action="zoom-out" title="Zoom out">−</button>
+        </div>
+        <svg id="brainstorm-markmap" class="mindmap-svg" aria-label="brainstorm mindmap"></svg>
+        <div class="mindmap-hint">drag to pan · scroll to zoom · click ⊝/⊕ on nodes to collapse</div>
+      </div>
+      <script id="mindmap-source" type="text/plain">{{MINDMAP_MARKDOWN}}</script>
+    </section>
+    <section>
+      <h2>Ideas</h2>
+      <div class="kanban" id="kanban-exploration"></div>
+    </section>
+    <section>
+      <h2>Open questions</h2>
+      <ul class="qs" id="questions-list"></ul>
+    </section>
+    <section>
+      <h2>Quotes</h2>
+      <div id="quotes-list"></div>
+    </section>
+  </div>
+
+  {{LENS_PANELS_HTML}}
+
+  <div class="panel" data-panel="timeline">
+    <section>
+      <h2>Timeline</h2>
+      <div class="mermaid">{{TIMELINE_MERMAID}}</div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="export-row">
+      <button id="copy-md" class="copy-btn">Copy as markdown for /sdd new</button>
+      <span class="export-hint">copies a structured markdown block (ideas grouped by tag + open questions + lens summaries) to your clipboard</span>
+    </div>
+    <textarea id="md-fallback" class="md-fallback" readonly></textarea>
+  </footer>
+
+</div>
+
+<script>
+  const STATE = {{STATE_JSON}};
+
+  // Tab switching
+  const tabsEl = document.getElementById('tabs');
+  const panels = document.querySelectorAll('.panel');
+  tabsEl.addEventListener('click', (e) => {
+    if (e.target.tagName !== 'BUTTON') return;
+    const tab = e.target.dataset.tab;
+    tabsEl.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === e.target));
+    panels.forEach(p => p.classList.toggle('active', p.dataset.panel === tab));
+    // Lazy-init or refit mindmap when its panel becomes active
+    // (markmap layout NaNs out if its host is display:none at init time — known SVG getBBox quirk)
+    requestAnimationFrame(ensureMindmap);
+  });
+
+  // Render Exploration tab: kanban + questions + quotes
+  function tagOf(idea) { return ['easy','risky','wild','unknown'].includes(idea.tag) ? idea.tag : 'unknown'; }
+  function renderKanban(containerId, ideas) {
+    const host = document.getElementById(containerId);
+    if (!host) return;
+    const tags = ['easy','risky','wild','unknown'];
+    host.innerHTML = tags.map(t => `
+      <div class="col" data-tag="${t}">
+        <h3>${t}</h3>
+        <div data-col="${t}"></div>
+      </div>
+    `).join('');
+    for (const idea of ideas) {
+      const col = host.querySelector(`[data-col="${tagOf(idea)}"]`);
+      if (!col) continue;
+      const src = idea.derived_from ? `<div class="src">derived from #${idea.derived_from}${idea.lens ? ' via ' + idea.lens : ''}${idea.axis ? ' / ' + idea.axis : ''}</div>` : '';
+      col.innerHTML += `<div class="card">${escapeHtml(idea.text)}${src}</div>`;
+    }
+    for (const t of tags) {
+      const col = host.querySelector(`[data-col="${t}"]`);
+      if (col && !col.children.length) col.innerHTML = '<div class="empty">—</div>';
+    }
+  }
+  function renderQuestions() {
+    const ul = document.getElementById('questions-list');
+    if (!STATE.questions_open || !STATE.questions_open.length) {
+      ul.innerHTML = '<li class="empty">no open questions captured</li>';
+      return;
+    }
+    ul.innerHTML = STATE.questions_open.map(q => `<li>${escapeHtml(q.text || q)}</li>`).join('');
+  }
+  function renderQuotes() {
+    const host = document.getElementById('quotes-list');
+    if (!STATE.quotes || !STATE.quotes.length) {
+      host.innerHTML = '<div class="empty">no quotes captured</div>';
+      return;
+    }
+    host.innerHTML = STATE.quotes.map(q => {
+      const src = q.turn ? `<span class="src">turn ${q.turn}</span>` : '';
+      return `<blockquote>${escapeHtml(q.text || q)}${src}</blockquote>`;
+    }).join('');
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  renderKanban('kanban-exploration', STATE.ideas || []);
+  renderQuestions();
+  renderQuotes();
+
+  // ── Markmap (lazy-init, fit on tab show, toolbar wiring) ─────────────────
+  // Manual API instead of markmap-autoloader so we can defer init until the
+  // panel is actually visible — markmap relies on getBBox() which returns NaN
+  // inside display:none containers, breaking layout permanently.
+  let mmInstance = null;
+  function ensureMindmap() {
+    const host = document.getElementById('brainstorm-markmap');
+    if (!host || !window.markmap) return;
+    const panel = host.closest('.panel');
+    if (!panel || !panel.classList.contains('active')) return;
+    if (mmInstance) {
+      requestAnimationFrame(() => mmInstance.fit());
+      return;
+    }
+    const md = (document.getElementById('mindmap-source')?.textContent || '').trim();
+    if (!md) return;
+    try {
+      const { Transformer, Markmap } = window.markmap;
+      const { root } = new Transformer().transform(md);
+      mmInstance = Markmap.create(host, null, root);
+      requestAnimationFrame(() => mmInstance.fit());
+    } catch (err) {
+      console.warn('markmap init failed:', err);
+    }
+  }
+  // Toolbar (Fit / Zoom in / Zoom out)
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-mm-action]');
+    if (!btn || !mmInstance) return;
+    const action = btn.dataset.mmAction;
+    if (action === 'fit') mmInstance.fit();
+    else if (action === 'zoom-in') mmInstance.rescale(1.25);
+    else if (action === 'zoom-out') mmInstance.rescale(0.8);
+  });
+  // Try on initial load (mindmap panel may already be active); also on window load
+  // (CDN scripts may resolve later) and on tab switches via the handler above.
+  window.addEventListener('load', ensureMindmap);
+  ensureMindmap();
+
+  // Render lens-tab kanbans (Claude writes one container per lens with id=`kanban-<lensSlug>`)
+  (STATE.lenses_applied || []).forEach(lens => {
+    const slug = lens.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const containerId = `kanban-${slug}`;
+    const lensIdeas = (STATE.ideas || []).filter(i => (i.lens || '').toLowerCase().replace(/[^a-z0-9]+/g,'-') === slug);
+    renderKanban(containerId, lensIdeas);
+  });
+
+  // Copy-as-markdown
+  function buildMarkdown() {
+    const lines = [];
+    lines.push(`# ${STATE.topic || 'brainstorm'}`);
+    lines.push('');
+    lines.push(`_brainstorm session — ${STATE.started_at || ''}${STATE.ended_at ? ' → ' + STATE.ended_at : ''}_`);
+    lines.push('');
+    const byTag = { easy: [], risky: [], wild: [], unknown: [] };
+    for (const i of (STATE.ideas || [])) {
+      const t = ['easy','risky','wild','unknown'].includes(i.tag) ? i.tag : 'unknown';
+      byTag[t].push(i);
+    }
+    lines.push('## Ideas');
+    lines.push('');
+    for (const t of ['easy','risky','wild','unknown']) {
+      if (!byTag[t].length) continue;
+      lines.push(`### ${t}`);
+      for (const i of byTag[t]) {
+        const meta = [i.lens, i.axis].filter(Boolean).join(' / ');
+        lines.push(`- ${i.text}${meta ? ` _(${meta})_` : ''}`);
+      }
+      lines.push('');
+    }
+    if (STATE.questions_open && STATE.questions_open.length) {
+      lines.push('## Open questions');
+      lines.push('');
+      for (const q of STATE.questions_open) lines.push(`- ${q.text || q}`);
+      lines.push('');
+    }
+    if (STATE.lenses_applied && STATE.lenses_applied.length) {
+      lines.push('## Lenses applied');
+      lines.push('');
+      for (const l of STATE.lenses_applied) {
+        lines.push(`- **${l.name}**${l.summary ? ` — ${l.summary}` : ''}`);
+      }
+      lines.push('');
+    }
+    if (STATE.quotes && STATE.quotes.length) {
+      lines.push('## Quotes');
+      lines.push('');
+      for (const q of STATE.quotes) lines.push(`> ${q.text || q}`);
+      lines.push('');
+    }
+    return lines.join('\n');
+  }
+  const btn = document.getElementById('copy-md');
+  const fallback = document.getElementById('md-fallback');
+  btn.addEventListener('click', async () => {
+    const md = buildMarkdown();
+    try {
+      if (!navigator.clipboard) throw new Error('no clipboard API');
+      await navigator.clipboard.writeText(md);
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy as markdown for /sdd new'; btn.classList.remove('copied'); }, 2000);
+    } catch (err) {
+      btn.textContent = 'Clipboard blocked — select text below';
+      btn.classList.add('fallback');
+      fallback.value = md;
+      fallback.classList.add('show');
+      fallback.focus();
+      fallback.select();
+    }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.18.12"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12"></script>
+<script>
+  // CDN scripts above expose window.markmap.{Transformer,Markmap}. The
+  // ensureMindmap() defined earlier picks them up — invoked here once more to
+  // cover the late-load case (DOMContentLoaded fired before scripts resolved).
+  if (typeof ensureMindmap === 'function') ensureMindmap();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js"></script>
+<script>
+  if (window.mermaid) { window.mermaid.initialize({ startOnLoad: true, theme: 'default' }); }
+</script>
+</body>
+</html>
